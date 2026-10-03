@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-ivory: #F8F5EE;
+    --color-burgundy: #7F3040;
+    --color-burgundy-dark: #642331;
+    --color-burgundy-light: #9B3D51;
+    --color-champagne: #C6A15B;
+    --color-champagne-light: #D9BD83;
+    --color-beige: #E8DED3;
+    --color-beige-subtle: #F2EBE3;
+    --color-charcoal: #292929;
+    --color-charcoal-muted: #575551;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+  }
+
+  h1, h2, h3, .font-academic, .font-serif-academic {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+
+  .font-editorial-body {
+    font-family: 'Newsreader', Georgia, serif;
+  }
+}
+
+/* Custom scrollbar and subtle print styling */
+@media print {
+  header, footer, nav, .no-print {
+    display: none !important;
+  }
+}
