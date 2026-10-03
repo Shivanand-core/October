@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, BookOpen, Sparkles, Building2, CheckCircle2 } from 'lucide-react';
+import { getAssetPath } from '../../utils/assets';
 
 interface Props {
   onNavigate: (path: string) => void;
@@ -7,7 +8,7 @@ interface Props {
 
 export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
   const [photoError, setPhotoError] = useState(false);
-  const campusPhotoSrc = '/logos/campus-photo.png';
+  const campusPhotoSrc = getAssetPath('logos/campus-photo.png');
 
   return (
     <>

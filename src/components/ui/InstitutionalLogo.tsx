@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getAssetPath } from '../../utils/assets';
 
 interface InstitutionalLogoProps {
   type: 'shivaji' | 'delhi_university';
@@ -21,12 +22,12 @@ export const InstitutionalLogo: React.FC<InstitutionalLogoProps> = ({
     lg: 'w-20 h-20'
   };
 
-  // Default paths matching user uploaded SVG assets
+  // Default paths matching user uploaded SVG assets with GitHub Pages base resolution
   const defaultPath = type === 'shivaji' 
-    ? '/logos/shivaji-college-logo.svg' 
-    : '/logos/delhi-university-logo.svg';
+    ? getAssetPath('logos/shivaji-college-logo.svg') 
+    : getAssetPath('logos/delhi-university-logo.svg');
 
-  const imgSrc = customSrc || defaultPath;
+  const imgSrc = customSrc ? getAssetPath(customSrc) : defaultPath;
 
   // If image hasn't errored, try rendering it
   if (!imageError) {

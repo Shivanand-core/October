@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Search, ChevronDown, ChevronRight, BookOpen, FileText, Send, ExternalLink, ShieldCheck } from 'lucide-react';
 import { InstitutionalLogo } from '../ui/InstitutionalLogo';
 import { JOURNAL_DATA } from '../../data/journal';
+import { getAssetPath } from '../../utils/assets';
 
 interface Props {
   currentPath: string;
@@ -55,7 +56,7 @@ export const MobileHeader: React.FC<Props> = ({ currentPath, onNavigate, onOpenS
         >
           <div className="w-9 h-9 rounded-full bg-white p-0.5 border border-[#C6A15B]/50 flex items-center justify-center shrink-0 shadow-xs overflow-hidden relative z-0">
             <img 
-              src="/logos/shivaji-college-logo.svg" 
+              src={getAssetPath('logos/shivaji-college-logo.svg')} 
               alt="Shivaji College Seal" 
               className="w-full h-full object-contain block relative z-0"
               onError={(e) => {
