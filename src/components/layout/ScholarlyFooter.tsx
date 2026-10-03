@@ -27,17 +27,18 @@ export const ScholarlyFooter: React.FC<Props> = ({ onNavigate }) => {
         {/* Brand & Seal Identity Card */}
         <div className="bg-[#2D2D2D] border border-stone-700/70 rounded-xs p-4 space-y-3">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-white p-1 border border-[#C6A15B]/60 shrink-0 shadow-xs flex items-center justify-center">
+            {/* Perfectly aligned circular logo container */}
+            <div className="w-12 h-12 aspect-square rounded-full bg-white p-1 border border-[#C6A15B]/70 shrink-0 shadow-xs flex items-center justify-center overflow-hidden relative z-0">
               <img 
                 src={getAssetPath('logos/shivaji-college-logo.svg')} 
                 alt="Shivaji College Seal" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain object-center block rounded-full select-none pointer-events-none relative z-0"
                 onError={(e) => {
                   (e.target as HTMLElement).style.display = 'none';
                 }}
               />
             </div>
-            <div>
+            <div className="flex-1 min-w-0 relative z-10">
               <span className="text-[10px] font-bold tracking-widest uppercase text-[#C6A15B] block">
                 ACADEMIC PUBLICATION
               </span>
@@ -47,7 +48,7 @@ export const ScholarlyFooter: React.FC<Props> = ({ onNavigate }) => {
               >
                 SHIVRAJ <span className="text-[#C6A15B]">350</span>
               </h4>
-              <p className="text-[11px] uppercase tracking-wider text-stone-300 font-medium mt-0.5">
+              <p className="text-[11px] uppercase tracking-wider text-stone-300 font-medium mt-0.5 truncate">
                 International Peer Reviewed Journal
               </p>
             </div>
@@ -102,7 +103,7 @@ export const ScholarlyFooter: React.FC<Props> = ({ onNavigate }) => {
               rel="noopener noreferrer"
               className="text-stone-200 hover:text-white flex items-center justify-between py-1 px-2 rounded-xs bg-[#242424] border border-stone-700/60 transition-colors"
             >
-              <span className="truncate">www.shivajicollege.ac.in</span>
+              <span className="truncate">shivaji.du.ac.in</span>
               <ExternalLink className="w-3 h-3 text-[#C6A15B] shrink-0" />
             </a>
           </div>
@@ -469,7 +470,7 @@ export const ScholarlyFooter: React.FC<Props> = ({ onNavigate }) => {
                   className="hover:text-[#C6A15B] text-stone-200 transition-colors inline-flex items-center gap-1.5 mt-0.5"
                 >
                   <ExternalLink className="w-3.5 h-3.5 text-[#C6A15B]" />
-                  <span>www.shivajicollege.ac.in</span>
+                  <span>shivaji.du.ac.in</span>
                 </a>
               </div>
 

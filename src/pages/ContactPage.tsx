@@ -98,7 +98,7 @@ export const ContactPage: React.FC<Props> = ({ onNavigate }) => {
                     rel="noopener noreferrer"
                     className="text-[#7F3040] font-medium hover:underline block mt-0.5"
                   >
-                    www.shivajicollege.ac.in
+                    shivaji.du.ac.in
                   </a>
                 </div>
               </div>

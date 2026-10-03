@@ -94,9 +94,9 @@ export const COMPLETE_JOURNAL_INFORMATION: FullJournalParticular[] = [
   },
   {
     label: 'Website',
-    value: 'www.shivajicollege.ac.in',
+    value: 'shivaji.du.ac.in',
     isConfirmed: true,
-    linkHref: 'https://www.shivajicollege.ac.in'
+    linkHref: 'https://shivaji.du.ac.in/'
   },
   {
     label: 'Address',

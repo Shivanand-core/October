@@ -31,21 +31,33 @@ export const InstitutionalUtilityBar: React.FC<Props> = ({ onNavigate, onOpenSea
           </span>
         </div>
 
-        {/* Right: College Portal & Quick Link */}
+        {/* Right: College & University Portals & Quick Link */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <a
             href={JOURNAL_DATA.collegeWebsite}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-[#7F3040] hover:text-[#642331] font-semibold transition-colors"
+            title="Visit Shivaji College Official Website (https://shivaji.du.ac.in/)"
           >
-            <span>College Portal</span>
+            <span>Shivaji College</span>
+            <ExternalLink className="w-2.5 h-2.5" />
+          </a>
+          <span className="text-[#C6A15B]">|</span>
+          <a
+            href="https://www.du.ac.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1 text-[#7F3040] hover:text-[#642331] font-semibold transition-colors"
+            title="Visit University of Delhi Official Website (https://www.du.ac.in/)"
+          >
+            <span>Univ. of Delhi</span>
             <ExternalLink className="w-2.5 h-2.5" />
           </a>
           <span className="text-[#C6A15B]">|</span>
           <button
             onClick={() => onNavigate('/publications/current')}
-            className="inline-flex items-center gap-1 text-[#292929] hover:text-[#7F3040] transition-colors font-medium"
+            className="inline-flex items-center gap-1 text-[#292929] hover:text-[#7F3040] transition-colors font-medium cursor-pointer"
           >
             <BookOpen className="w-3 h-3 text-[#7F3040]" />
             <span>Inaugural Issue</span>

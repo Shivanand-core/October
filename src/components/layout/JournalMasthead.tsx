@@ -14,37 +14,41 @@ export const JournalMasthead: React.FC<Props> = ({ onNavigate }) => {
         <div className="md:hidden flex flex-col items-center text-center space-y-2.5">
           {/* Top Row: Institutional Logos Framing the Institution Lineage */}
           <div className="w-full flex items-center justify-between px-1">
-            <div 
-              onClick={() => onNavigate('/')} 
-              className="flex items-center gap-2 cursor-pointer text-left"
-              title="Shivaji College, University of Delhi"
+            <a 
+              href="https://shivaji.du.ac.in/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 cursor-pointer text-left group"
+              title="Visit Shivaji College Official Website (https://shivaji.du.ac.in/)"
             >
               <InstitutionalLogo type="shivaji" size="sm" />
               <div className="flex flex-col">
                 <span className="text-[9px] uppercase tracking-wider text-[#7F3040] font-semibold leading-none">
                   PUBLISHER
                 </span>
-                <span className="text-xs font-bold text-[#292929] font-academic leading-tight mt-0.5">
+                <span className="text-xs font-bold text-[#292929] font-academic leading-tight mt-0.5 group-hover:text-[#7F3040] group-hover:underline">
                   SHIVAJI COLLEGE
                 </span>
               </div>
-            </div>
+            </a>
 
-            <div 
-              onClick={() => onNavigate('/')} 
-              className="flex items-center gap-2 cursor-pointer text-right"
-              title="University of Delhi, Estd. 1922"
+            <a 
+              href="https://www.du.ac.in/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 cursor-pointer text-right group"
+              title="Visit University of Delhi Official Website (https://www.du.ac.in/)"
             >
               <div className="flex flex-col items-end">
                 <span className="text-[9px] uppercase tracking-wider text-[#7F3040] font-semibold leading-none">
                   AFFILIATION
                 </span>
-                <span className="text-xs font-bold text-[#292929] font-academic leading-tight mt-0.5">
+                <span className="text-xs font-bold text-[#292929] font-academic leading-tight mt-0.5 group-hover:text-[#7F3040] group-hover:underline">
                   UNIV. OF DELHI
                 </span>
               </div>
               <InstitutionalLogo type="delhi_university" size="sm" />
-            </div>
+            </a>
           </div>
 
           {/* Center Main Masthead */}
@@ -69,23 +73,26 @@ export const JournalMasthead: React.FC<Props> = ({ onNavigate }) => {
         <div className="hidden md:flex items-center justify-between gap-6">
           
           {/* LEFT: Shivaji College Publisher / Institution Identity */}
-          <div 
-            onClick={() => onNavigate('/')}
-            className="flex items-center gap-3 cursor-pointer group text-left w-auto justify-start"
+          <a 
+            href="https://shivaji.du.ac.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 cursor-pointer group text-left w-auto justify-start select-none"
+            title="Visit Shivaji College Official Website (https://shivaji.du.ac.in/)"
           >
             <InstitutionalLogo type="shivaji" size="md" />
             <div className="flex flex-col">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-[#7F3040]">
                 Publisher & Publishing Institution
               </span>
-              <span className="text-base lg:text-lg font-bold tracking-tight text-[#292929] font-academic group-hover:text-[#7F3040] transition-colors leading-tight">
+              <span className="text-base lg:text-lg font-bold tracking-tight text-[#292929] font-academic group-hover:text-[#7F3040] group-hover:underline transition-colors leading-tight">
                 SHIVAJI COLLEGE
               </span>
               <span className="text-xs text-[#575551] font-medium">
                 University of Delhi · New Delhi
               </span>
             </div>
-          </div>
+          </a>
 
           {/* CENTER: Main Journal Masthead (Horizontal, Issue-Neutral) */}
           <div 
@@ -108,15 +115,18 @@ export const JournalMasthead: React.FC<Props> = ({ onNavigate }) => {
           </div>
 
           {/* RIGHT: University of Delhi Affiliation */}
-          <div 
-            onClick={() => onNavigate('/')}
-            className="flex items-center gap-3 text-right w-auto justify-end cursor-pointer group"
+          <a 
+            href="https://www.du.ac.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 text-right w-auto justify-end cursor-pointer group select-none"
+            title="Visit University of Delhi Official Website (https://www.du.ac.in/)"
           >
             <div className="flex flex-col text-right">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-[#7F3040]">
                 Academic Affiliation
               </span>
-              <span className="text-base lg:text-lg font-bold tracking-tight text-[#292929] font-academic group-hover:text-[#7F3040] transition-colors leading-tight">
+              <span className="text-base lg:text-lg font-bold tracking-tight text-[#292929] font-academic group-hover:text-[#7F3040] group-hover:underline transition-colors leading-tight">
                 UNIVERSITY OF DELHI
               </span>
               <span className="text-xs text-[#575551] font-medium">
@@ -124,7 +134,7 @@ export const JournalMasthead: React.FC<Props> = ({ onNavigate }) => {
               </span>
             </div>
             <InstitutionalLogo type="delhi_university" size="md" />
-          </div>
+          </a>
 
         </div>
       </div>

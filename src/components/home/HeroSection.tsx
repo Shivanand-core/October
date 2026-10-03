@@ -18,9 +18,25 @@ export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
           
           {/* Eyebrow & Institutional Lineage */}
           <div className="flex items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase text-[#7F3040]">
-            <span>SHIVAJI COLLEGE</span>
+            <a 
+              href="https://shivaji.du.ac.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline hover:text-[#5B1B29] transition-colors"
+              title="Visit Shivaji College Official Website (https://shivaji.du.ac.in/)"
+            >
+              SHIVAJI COLLEGE
+            </a>
             <span className="text-[#C6A15B]" aria-hidden="true">•</span>
-            <span>UNIVERSITY OF DELHI</span>
+            <a 
+              href="https://www.du.ac.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline hover:text-[#5B1B29] transition-colors"
+              title="Visit University of Delhi Official Website (https://www.du.ac.in/)"
+            >
+              UNIVERSITY OF DELHI
+            </a>
           </div>
 
           {/* Primary Journal Brand Title */}
@@ -124,7 +140,7 @@ export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
 
               {/* Supporting Copy */}
               <p className="text-base sm:text-lg text-[#575551] font-editorial-body leading-relaxed max-w-2xl">
-                Published by <strong className="text-[#292929] font-semibold">Shivaji College, University of Delhi</strong>, 
+                Published by <a href="https://shivaji.du.ac.in/" target="_blank" rel="noopener noreferrer" className="text-[#292929] font-semibold hover:text-[#7F3040] hover:underline" title="Visit Shivaji College Official Website">Shivaji College</a>, <a href="https://www.du.ac.in/" target="_blank" rel="noopener noreferrer" className="text-[#292929] font-semibold hover:text-[#7F3040] hover:underline" title="Visit University of Delhi Official Website">University of Delhi</a>, 
                 <em> Shivraj 350</em> is a peer-reviewed academic journal dedicated to disseminating 
                 original scientific investigations, humanistic reflections, socio-economic research, 
                 and interdisciplinary methodologies addressing contemporary challenges.
