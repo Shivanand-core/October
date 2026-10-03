@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, ExternalLink, ArrowUp, ChevronDown } from 'lucide-react';
+import { Mail, MapPin, ExternalLink, ArrowUp, ChevronDown, BookOpen, Layers, PenTool, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { JOURNAL_DATA } from '../../data/journal';
+import { getAssetPath } from '../../utils/assets';
 
 interface Props {
   onNavigate: (path: string) => void;
@@ -18,217 +19,273 @@ export const ScholarlyFooter: React.FC<Props> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="bg-[#292929] text-[#F8F5EE] border-t-4 border-[#7F3040]">
+    <footer className="bg-[#242424] text-[#F8F5EE] border-t-4 border-[#7F3040]">
       
-      {/* MOBILE FOOTER (Viewport < md): Compact with Collapsible Accordion Sections */}
-      <div className="md:hidden px-4 py-8 space-y-6">
+      {/* MOBILE FOOTER (Viewport < md): Scholarly, compact, highly polished */}
+      <div className="md:hidden px-4 py-8 space-y-5">
         
-        {/* Brand & Institutional Identity */}
-        <div className="space-y-2 border-b border-stone-700/80 pb-5">
-          <span className="text-[10px] font-bold tracking-widest uppercase text-[#C6A15B] block">
-            ACADEMIC PUBLICATION
-          </span>
-          <h4 
-            style={{ fontFamily: "'Times New Roman', Times, serif" }}
-            className="text-2xl font-bold text-white tracking-wide"
-          >
-            SHIVRAJ <span className="text-[#C6A15B]">350</span>
-          </h4>
-          <p className="text-xs uppercase tracking-wider text-stone-300 font-medium">
-            International Peer Reviewed Multidisciplinary Journal
-          </p>
-          <div className="pt-2 text-xs text-stone-300">
-            <strong className="text-white">Shivaji College, University of Delhi</strong>
-            <p className="text-[11px] text-stone-400 mt-0.5">
-              Accredited by NAAC with Grade &quot;A&quot; · Ring Road, Raja Garden, New Delhi – 110027
+        {/* Brand & Seal Identity Card */}
+        <div className="bg-[#2D2D2D] border border-stone-700/70 rounded-xs p-4 space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-white p-1 border border-[#C6A15B]/60 shrink-0 shadow-xs flex items-center justify-center">
+              <img 
+                src={getAssetPath('logos/shivaji-college-logo.svg')} 
+                alt="Shivaji College Seal" 
+                className="w-full h-full object-contain"
+                onError={(e) => {
+                  (e.target as HTMLElement).style.display = 'none';
+                }}
+              />
+            </div>
+            <div>
+              <span className="text-[10px] font-bold tracking-widest uppercase text-[#C6A15B] block">
+                ACADEMIC PUBLICATION
+              </span>
+              <h4 
+                style={{ fontFamily: "'Times New Roman', Times, serif" }}
+                className="text-xl font-bold text-white tracking-wide leading-tight"
+              >
+                SHIVRAJ <span className="text-[#C6A15B]">350</span>
+              </h4>
+              <p className="text-[11px] uppercase tracking-wider text-stone-300 font-medium mt-0.5">
+                International Peer Reviewed Journal
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-2.5 border-t border-stone-700/60 text-xs text-stone-300 space-y-0.5">
+            <strong className="text-white block font-medium">Shivaji College, University of Delhi</strong>
+            <p className="text-[11px] text-stone-400">
+              NAAC Accredited Grade &quot;A&quot; · Ring Road, Raja Garden, New Delhi – 110027
             </p>
           </div>
         </div>
 
-        {/* Collapsible Accordion Sections */}
-        <div className="divide-y divide-stone-800 border-y border-stone-800">
-          
-          {/* 1. About Journal */}
-          <div>
-            <button
-              onClick={() => toggleSection('about')}
-              className="w-full py-3.5 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#C6A15B]"
-              aria-expanded={openSection === 'about'}
-            >
-              <span>ABOUT JOURNAL</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${openSection === 'about' ? 'rotate-180 text-white' : ''}`} />
-            </button>
-            {openSection === 'about' && (
-              <ul className="pb-3 pt-1 space-y-2.5 text-xs text-stone-300 pl-1">
-                <li>
-                  <button onClick={() => onNavigate('/about')} className="hover:text-white transition-colors text-left block w-full">
-                    About the Journal (Overview)
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/about/aims-and-scope')} className="hover:text-white transition-colors text-left block w-full">
-                    Aims & Scope
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/about/journal-information')} className="hover:text-white transition-colors text-left block w-full">
-                    Journal Particulars & Indexing
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/editorial-board')} className="hover:text-white transition-colors text-left block w-full">
-                    Editorial Board & Advisory Council
-                  </button>
-                </li>
-              </ul>
-            )}
+        {/* Journal Key Particulars 2x2 Grid */}
+        <div className="grid grid-cols-2 gap-2 text-[11px]">
+          <div className="bg-[#2D2D2D] border border-stone-800 p-2.5 rounded-xs">
+            <span className="text-[#C6A15B] font-bold block text-[10px] uppercase tracking-wider">Format</span>
+            <span className="text-stone-300">Online Scholarly Repository</span>
           </div>
-
-          {/* 2. Publications */}
-          <div>
-            <button
-              onClick={() => toggleSection('publications')}
-              className="w-full py-3.5 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#C6A15B]"
-              aria-expanded={openSection === 'publications'}
-            >
-              <span>PUBLICATIONS</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${openSection === 'publications' ? 'rotate-180 text-white' : ''}`} />
-            </button>
-            {openSection === 'publications' && (
-              <ul className="pb-3 pt-1 space-y-2.5 text-xs text-stone-300 pl-1">
-                <li>
-                  <button onClick={() => onNavigate('/publications/current')} className="hover:text-white transition-colors text-left block w-full">
-                    Current Issue (Inaugural Release)
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/publications/archives')} className="hover:text-white transition-colors text-left block w-full">
-                    Archives & Past Issues
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/publications/articles')} className="hover:text-white transition-colors text-left block w-full">
-                    Articles Repository & Search
-                  </button>
-                </li>
-              </ul>
-            )}
+          <div className="bg-[#2D2D2D] border border-stone-800 p-2.5 rounded-xs">
+            <span className="text-[#C6A15B] font-bold block text-[10px] uppercase tracking-wider">Frequency</span>
+            <span className="text-stone-300">Biannual Publication</span>
           </div>
-
-          {/* 3. For Authors */}
-          <div>
-            <button
-              onClick={() => toggleSection('authors')}
-              className="w-full py-3.5 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#C6A15B]"
-              aria-expanded={openSection === 'authors'}
-            >
-              <span>FOR AUTHORS</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${openSection === 'authors' ? 'rotate-180 text-white' : ''}`} />
-            </button>
-            {openSection === 'authors' && (
-              <ul className="pb-3 pt-1 space-y-2.5 text-xs text-stone-300 pl-1">
-                <li>
-                  <button onClick={() => onNavigate('/for-authors/guidelines')} className="hover:text-white transition-colors text-left block w-full">
-                    Author Guidelines & Preparation
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/for-authors/submission')} className="hover:text-white transition-colors text-left block w-full">
-                    Manuscript Submission Instructions
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/for-authors/call-for-papers')} className="hover:text-white transition-colors text-left block w-full">
-                    Official Call for Papers
-                  </button>
-                </li>
-              </ul>
-            )}
+          <div className="bg-[#2D2D2D] border border-stone-800 p-2.5 rounded-xs">
+            <span className="text-[#C6A15B] font-bold block text-[10px] uppercase tracking-wider">Evaluation</span>
+            <span className="text-stone-300">Double-Blind Peer Review</span>
           </div>
-
-          {/* 4. Policies */}
-          <div>
-            <button
-              onClick={() => toggleSection('policies')}
-              className="w-full py-3.5 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#C6A15B]"
-              aria-expanded={openSection === 'policies'}
-            >
-              <span>POLICIES & ETHICS</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${openSection === 'policies' ? 'rotate-180 text-white' : ''}`} />
-            </button>
-            {openSection === 'policies' && (
-              <ul className="pb-3 pt-1 space-y-2.5 text-xs text-stone-300 pl-1">
-                <li>
-                  <button onClick={() => onNavigate('/policies/peer-review')} className="hover:text-white transition-colors text-left block w-full">
-                    Double-Blind Peer Review Policy
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/policies/publication-ethics')} className="hover:text-white transition-colors text-left block w-full">
-                    COPE Publication Ethics
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/policies/plagiarism')} className="hover:text-white transition-colors text-left block w-full">
-                    Plagiarism & Similarity Standards
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => onNavigate('/policies/open-access')} className="hover:text-white transition-colors text-left block w-full">
-                    Open Access & Archiving
-                  </button>
-                </li>
-              </ul>
-            )}
+          <div className="bg-[#2D2D2D] border border-stone-800 p-2.5 rounded-xs">
+            <span className="text-[#C6A15B] font-bold block text-[10px] uppercase tracking-wider">Access</span>
+            <span className="text-stone-300">Open Access Repository</span>
           </div>
+        </div>
 
-          {/* 5. Contact & Inquiries */}
-          <div>
-            <button
-              onClick={() => toggleSection('contact')}
-              className="w-full py-3.5 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#C6A15B]"
-              aria-expanded={openSection === 'contact'}
-            >
-              <span>CONTACT & EDITORIAL OFFICE</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${openSection === 'contact' ? 'rotate-180 text-white' : ''}`} />
-            </button>
-            {openSection === 'contact' && (
-              <div className="pb-4 pt-1 space-y-3 text-xs text-stone-300 pl-1">
-                <div>
-                  <span className="text-[#C6A15B] font-semibold block">Editorial Inquiries:</span>
-                  <a
-                    href={`mailto:${JOURNAL_DATA.email}`}
-                    className="text-stone-200 hover:text-white inline-flex items-center gap-1.5 mt-0.5"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-[#C6A15B]" />
-                    <span>{JOURNAL_DATA.email}</span>
-                  </a>
-                </div>
-                <div>
-                  <span className="text-[#C6A15B] font-semibold block">College Portal:</span>
-                  <a
-                    href={JOURNAL_DATA.collegeWebsite}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-stone-200 hover:text-white inline-flex items-center gap-1.5 mt-0.5"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5 text-[#C6A15B]" />
-                    <span>www.shivajicollege.ac.in</span>
-                  </a>
-                </div>
-              </div>
-            )}
+        {/* Quick Contact & College Portal Card */}
+        <div className="bg-[#2D2D2D] border border-stone-800 rounded-xs p-3 space-y-2 text-xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#C6A15B]">
+              Direct Inquiries & Portal
+            </span>
           </div>
+          <div className="space-y-1.5 pt-0.5">
+            <a
+              href={`mailto:${JOURNAL_DATA.email}`}
+              className="text-stone-200 hover:text-white flex items-center gap-2 py-1 px-2 rounded-xs bg-[#242424] border border-stone-700/60 transition-colors"
+            >
+              <Mail className="w-3.5 h-3.5 text-[#C6A15B] shrink-0" />
+              <span className="truncate">{JOURNAL_DATA.email}</span>
+            </a>
+            <a
+              href={JOURNAL_DATA.collegeWebsite}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-stone-200 hover:text-white flex items-center justify-between py-1 px-2 rounded-xs bg-[#242424] border border-stone-700/60 transition-colors"
+            >
+              <span className="truncate">www.shivajicollege.ac.in</span>
+              <ExternalLink className="w-3 h-3 text-[#C6A15B] shrink-0" />
+            </a>
+          </div>
+        </div>
 
+        {/* Refined Accordion Navigation Sections */}
+        <div className="space-y-2">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#C6A15B] block px-1">
+            Browse Directory
+          </span>
+
+          <div className="bg-[#2D2D2D] border border-stone-800 rounded-xs overflow-hidden divide-y divide-stone-800/80">
+            
+            {/* 1. About Journal */}
+            <div>
+              <button
+                onClick={() => toggleSection('about')}
+                className="w-full py-3 px-3.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-stone-200 hover:text-[#C6A15B] transition-colors"
+                aria-expanded={openSection === 'about'}
+              >
+                <span className="flex items-center gap-2">
+                  <BookOpen className="w-3.5 h-3.5 text-[#C6A15B]" />
+                  <span>ABOUT JOURNAL</span>
+                </span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 text-stone-400 ${openSection === 'about' ? 'rotate-180 text-[#C6A15B]' : ''}`} />
+              </button>
+              {openSection === 'about' && (
+                <ul className="px-3.5 pb-3 pt-1 space-y-2 text-xs text-stone-300 border-t border-stone-800/60 bg-[#252525]">
+                  <li>
+                    <button onClick={() => onNavigate('/about')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>About the Journal (Overview)</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/about/aims-and-scope')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Aims & Scope</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/about/journal-information')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Journal Particulars & Indexing</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/editorial-board')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Editorial Board & Leadership</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+
+            {/* 2. Publications */}
+            <div>
+              <button
+                onClick={() => toggleSection('publications')}
+                className="w-full py-3 px-3.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-stone-200 hover:text-[#C6A15B] transition-colors"
+                aria-expanded={openSection === 'publications'}
+              >
+                <span className="flex items-center gap-2">
+                  <Layers className="w-3.5 h-3.5 text-[#C6A15B]" />
+                  <span>PUBLICATIONS</span>
+                </span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 text-stone-400 ${openSection === 'publications' ? 'rotate-180 text-[#C6A15B]' : ''}`} />
+              </button>
+              {openSection === 'publications' && (
+                <ul className="px-3.5 pb-3 pt-1 space-y-2 text-xs text-stone-300 border-t border-stone-800/60 bg-[#252525]">
+                  <li>
+                    <button onClick={() => onNavigate('/publications/current')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Current Issue (Volume 1, Issue 1)</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/publications/archives')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Archives & Past Volumes</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/publications/articles')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Articles Repository & Index</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+
+            {/* 3. For Authors */}
+            <div>
+              <button
+                onClick={() => toggleSection('authors')}
+                className="w-full py-3 px-3.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-stone-200 hover:text-[#C6A15B] transition-colors"
+                aria-expanded={openSection === 'authors'}
+              >
+                <span className="flex items-center gap-2">
+                  <PenTool className="w-3.5 h-3.5 text-[#C6A15B]" />
+                  <span>FOR AUTHORS</span>
+                </span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 text-stone-400 ${openSection === 'authors' ? 'rotate-180 text-[#C6A15B]' : ''}`} />
+              </button>
+              {openSection === 'authors' && (
+                <ul className="px-3.5 pb-3 pt-1 space-y-2 text-xs text-stone-300 border-t border-stone-800/60 bg-[#252525]">
+                  <li>
+                    <button onClick={() => onNavigate('/for-authors/guidelines')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Author Guidelines & Preparation</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/for-authors/submission')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Manuscript Submission Process</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/for-authors/call-for-papers')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Official Call for Papers</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+
+            {/* 4. Policies */}
+            <div>
+              <button
+                onClick={() => toggleSection('policies')}
+                className="w-full py-3 px-3.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-stone-200 hover:text-[#C6A15B] transition-colors"
+                aria-expanded={openSection === 'policies'}
+              >
+                <span className="flex items-center gap-2">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#C6A15B]" />
+                  <span>POLICIES & ETHICS</span>
+                </span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 text-stone-400 ${openSection === 'policies' ? 'rotate-180 text-[#C6A15B]' : ''}`} />
+              </button>
+              {openSection === 'policies' && (
+                <ul className="px-3.5 pb-3 pt-1 space-y-2 text-xs text-stone-300 border-t border-stone-800/60 bg-[#252525]">
+                  <li>
+                    <button onClick={() => onNavigate('/policies/peer-review')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Double-Blind Peer Review</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/policies/publication-ethics')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>COPE Publication Ethics</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/policies/plagiarism')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Plagiarism & Similarity Standards</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => onNavigate('/policies/open-access')} className="hover:text-[#C6A15B] transition-colors text-left flex items-center justify-between w-full py-1">
+                      <span>Open Access & Archiving</span>
+                      <ArrowRight className="w-3 h-3 text-stone-500" />
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+
+          </div>
         </div>
 
         {/* Back to Top */}
-        <div className="pt-2 text-center">
+        <div className="pt-2 flex justify-center">
           <button
             onClick={scrollToTop}
-            className="w-full py-2.5 px-4 bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white text-xs font-medium rounded-xs inline-flex items-center justify-center gap-1.5 transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#2D2D2D] hover:bg-[#383838] text-stone-200 hover:text-white text-xs font-semibold rounded-full border border-stone-700/80 transition-all shadow-xs cursor-pointer active:scale-95"
           >
-            <ArrowUp className="w-3.5 h-3.5" />
+            <ArrowUp className="w-3.5 h-3.5 text-[#C6A15B]" />
             <span>Back to top</span>
           </button>
         </div>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, BookOpen, Calendar, Layers, FileCheck } from 'lucide-react';
 import { ALL_ISSUES } from '../../data/articles';
+import { getAssetPath } from '../../utils/assets';
 
 interface Props {
   onNavigate: (path: string) => void;
@@ -8,6 +9,7 @@ interface Props {
 
 export const CurrentIssueSection: React.FC<Props> = ({ onNavigate }) => {
   const currentIssue = ALL_ISSUES[0]; // Volume 1, Issue 1 (Inaugural Issue)
+  const [coverError, setCoverError] = useState(false);
 
   return (
     <section className="py-10 sm:py-14 bg-[#E8DED3]/40 border-b border-[#E8DED3] px-3 sm:px-6 lg:px-8">
@@ -34,46 +36,62 @@ export const CurrentIssueSection: React.FC<Props> = ({ onNavigate }) => {
         <div className="bg-white border border-[#E8DED3] rounded-xs shadow-xs overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 p-5 sm:p-8 lg:p-10 items-center">
             
-            {/* Left: Academic Monograph Cover Design */}
+            {/* Left: Official Current Issue Cover Page */}
             <div className="md:col-span-4 lg:col-span-4 flex justify-center">
-              <div className="w-full max-w-[210px] sm:max-w-[260px] aspect-[3/4] bg-[#7F3040] text-white p-4 sm:p-5 rounded-xs shadow-md border-2 border-[#C6A15B]/50 flex flex-col justify-between relative group select-none">
-                
-                {/* Cover Top Foil Header */}
-                <div className="border-b border-[#C6A15B]/40 pb-2.5 sm:pb-3">
-                  <span className="text-[10px] tracking-widest uppercase text-[#C6A15B] font-semibold block">
-                    SHIVAJI COLLEGE · DU
-                  </span>
-                  <span className="text-[9px] text-stone-200 tracking-wider uppercase block mt-0.5">
-                    Peer Reviewed Journal
-                  </span>
+              {!coverError ? (
+                <div className="relative w-full max-w-[210px] sm:max-w-[250px] aspect-[3819/4963] rounded-xs shadow-md border border-[#E8DED3] overflow-hidden group bg-[#F8F5EE] select-none">
+                  <img
+                    src={getAssetPath('logos/cover-page.jpg')}
+                    alt="Shivraj 350 - Volume 1, Issue 1 Official Cover Page"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    onError={() => setCoverError(true)}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+                    <span className="text-[11px] text-white font-medium font-academic tracking-wide">
+                      Vol. 1, Issue 1 (Inaugural)
+                    </span>
+                  </div>
                 </div>
+              ) : (
+                <div className="w-full max-w-[210px] sm:max-w-[260px] aspect-[3/4] bg-[#7F3040] text-white p-4 sm:p-5 rounded-xs shadow-md border-2 border-[#C6A15B]/50 flex flex-col justify-between relative group select-none">
+                  
+                  {/* Cover Top Foil Header */}
+                  <div className="border-b border-[#C6A15B]/40 pb-2.5 sm:pb-3">
+                    <span className="text-[10px] tracking-widest uppercase text-[#C6A15B] font-semibold block">
+                      SHIVAJI COLLEGE · DU
+                    </span>
+                    <span className="text-[9px] text-stone-200 tracking-wider uppercase block mt-0.5">
+                      Peer Reviewed Journal
+                    </span>
+                  </div>
 
-                {/* Cover Main Title */}
-                <div className="my-auto py-3 sm:py-4 text-center">
-                  <span className="text-xs uppercase tracking-widest text-stone-300 block mb-1">
-                    INAUGURAL ISSUE
-                  </span>
-                  <h4 className="text-xl sm:text-3xl font-bold font-academic text-white tracking-wide leading-tight">
-                    SHIVRAJ <span className="text-[#C6A15B]">350</span>
-                  </h4>
-                  <div className="w-10 sm:w-12 h-0.5 bg-[#C6A15B] mx-auto my-2" />
-                  <p className="text-[10px] uppercase tracking-wider text-stone-200 px-2 leading-tight">
-                    Volume 1 · Issue 1
-                  </p>
-                  <p className="text-[9px] text-[#C6A15B] mt-1 font-medium">
-                    January–June 2026
-                  </p>
+                  {/* Cover Main Title */}
+                  <div className="my-auto py-3 sm:py-4 text-center">
+                    <span className="text-xs uppercase tracking-widest text-stone-300 block mb-1">
+                      INAUGURAL ISSUE
+                    </span>
+                    <h4 className="text-xl sm:text-3xl font-bold font-academic text-white tracking-wide leading-tight">
+                      SHIVRAJ <span className="text-[#C6A15B]">350</span>
+                    </h4>
+                    <div className="w-10 sm:w-12 h-0.5 bg-[#C6A15B] mx-auto my-2" />
+                    <p className="text-[10px] uppercase tracking-wider text-stone-200 px-2 leading-tight">
+                      Volume 1 · Issue 1
+                    </p>
+                    <p className="text-[9px] text-[#C6A15B] mt-1 font-medium">
+                      January–June 2026
+                    </p>
+                  </div>
+
+                  {/* Cover Bottom Publisher Seal */}
+                  <div className="border-t border-[#C6A15B]/40 pt-2 flex items-center justify-between text-[9px] text-stone-300">
+                    <span>New Delhi, India</span>
+                    <span className="text-[#C6A15B]">ISSN Pending</span>
+                  </div>
+
+                  {/* Cover shine accent */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/10 pointer-events-none rounded-xs" />
                 </div>
-
-                {/* Cover Bottom Publisher Seal */}
-                <div className="border-t border-[#C6A15B]/40 pt-2 flex items-center justify-between text-[9px] text-stone-300">
-                  <span>New Delhi, India</span>
-                  <span className="text-[#C6A15B]">ISSN Pending</span>
-                </div>
-
-                {/* Cover shine accent */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/10 pointer-events-none rounded-xs" />
-              </div>
+              )}
             </div>
 
             {/* Right: Issue Details & Content Navigation */}

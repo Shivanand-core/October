@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Download, Quote, ArrowRight, User, Building, ExternalLink } from 'lucide-react';
+import { FileText, Download, Quote, ArrowRight, User, Building, ExternalLink, Sparkles } from 'lucide-react';
 import { SAMPLE_ARTICLES } from '../../data/articles';
 import { Article } from '../../types/journal';
 import { CitationModal } from '../layout/CitationModal';
@@ -14,148 +14,160 @@ export const LatestArticlesSection: React.FC<Props> = ({ onNavigate, onSelectArt
 
   const handlePdfClick = (e: React.MouseEvent, article: Article) => {
     e.stopPropagation();
-    // Scholarly PDF reader preview or printable version
     window.print();
   };
 
   return (
-    <section className="py-14 bg-[#F8F5EE] border-b border-[#E8DED3] px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-10 sm:py-12 bg-[#F8F5EE] border-b border-[#E8DED3] px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
         
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#E8DED3] pb-3 mb-8 gap-3">
+        {/* Section Header: Refined & Elegant */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#E8DED3] pb-3 mb-6 gap-2">
           <div>
-            <span className="text-[11px] font-bold tracking-widest uppercase text-[#7F3040]">
-              SCHOLARLY REPOSITORY
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-bold font-academic text-[#292929] mt-0.5">
+            <div className="flex items-center gap-1.5 mb-1">
+              <span className="h-0.5 w-5 bg-[#C6A15B]" aria-hidden="true" />
+              <span className="text-[10px] font-bold tracking-widest uppercase text-[#7F3040]">
+                SCHOLARLY REPOSITORY
+              </span>
+            </div>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-academic text-[#292929]">
               Latest Published Articles
             </h3>
           </div>
           <button
             onClick={() => onNavigate('/publications/articles')}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#7F3040] hover:text-[#642331] uppercase tracking-wider"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-[#7F3040] hover:text-[#5B1B29] transition-colors cursor-pointer group"
           >
             <span>View All Repository Articles</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#C6A15B] group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
 
-        {/* Development & Editorial Pipeline Notice (Section 17 Compliance) */}
-        <div className="mb-6 p-3 bg-[#E8DED3]/40 border-l-2 border-[#C6A15B] text-xs text-[#575551] flex items-center justify-between">
+        {/* Compact Editorial Pipeline Note */}
+        <div className="mb-5 px-3.5 py-2 bg-[#F6F1E8] border-l-2 border-[#C6A15B] rounded-xs text-xs text-[#575551] flex flex-col sm:flex-row sm:items-center justify-between gap-1">
           <span>
-            <strong className="text-[#292929]">Inaugural Issue Preview:</strong> Below are representative manuscripts 
-            undergoing final typesetting and continuous publishing in Volume 1, Issue 1.
+            <strong className="text-[#292929]">Inaugural Volume 1, Issue 1:</strong> Peer-reviewed research undergoing continuous publishing.
           </span>
-          <span className="hidden md:inline text-[11px] text-[#7F3040] font-semibold">
-            Double-Blind Peer Reviewed
+          <span className="text-[11px] text-[#7F3040] font-semibold shrink-0">
+            Double-Blind Evaluated
           </span>
         </div>
 
-        {/* Articles List */}
-        <div className="space-y-6">
+        {/* Refined & Streamlined Articles List */}
+        <div className="space-y-3.5">
           {SAMPLE_ARTICLES.map((article) => (
             <article
               key={article.id}
-              className="bg-white border border-[#E8DED3] hover:border-[#7F3040]/70 rounded-xs p-6 lg:p-7 transition-all duration-200 hover:shadow-xs group"
+              className="bg-white border border-[#E8DED3] hover:border-[#7F3040]/70 rounded-xs p-4 sm:p-5 transition-all duration-200 hover:shadow-xs group hover:bg-[#FCFAF6] flex flex-col justify-between"
             >
-              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+              <div className="space-y-2">
                 
-                {/* Main Article Body */}
-                <div className="flex-1 space-y-3">
-                  
-                  {/* Article Metadata (Zero-pill text styling) */}
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#575551]">
-                    <span className="font-bold text-[#7F3040] tracking-wide uppercase">
-                      {article.articleType}
-                    </span>
-                    <span aria-hidden="true" className="text-[#C6A15B]">•</span>
-                    <span>Vol. {article.volume}, Issue {article.issue}</span>
-                    <span aria-hidden="true" className="text-[#C6A15B]">•</span>
-                    <span>{article.month} {article.year}</span>
-                    {article.pages && (
-                      <>
-                        <span aria-hidden="true" className="text-[#C6A15B]">•</span>
-                        <span>pp. {article.pages}</span>
-                      </>
-                    )}
-                    {article.isSampleOrPreview && (
-                      <>
-                        <span aria-hidden="true" className="text-[#C6A15B]">•</span>
-                        <span className="text-amber-800 font-medium">
-                          Preview Release
-                        </span>
-                      </>
-                    )}
-                  </div>
-
-                  {/* Title */}
-                  <h4 
-                    onClick={() => onSelectArticle(article.slug)}
-                    className="text-xl sm:text-2xl font-bold font-academic text-[#292929] group-hover:text-[#7F3040] transition-colors cursor-pointer leading-snug"
-                  >
-                    {article.title}
-                  </h4>
-
-                  {/* Authors & Institutional Affiliation */}
-                  <div className="text-xs text-[#575551] space-y-1 pt-0.5">
-                    <div className="flex items-center gap-1.5 font-medium text-slate-800">
-                      <User className="w-3.5 h-3.5 text-[#7F3040] shrink-0" />
-                      <span>{article.authors.map(a => a.name).join(', ')}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-slate-600">
-                      <Building className="w-3.5 h-3.5 text-[#C6A15B] shrink-0" />
-                      <span className="line-clamp-1">{article.authors[0]?.affiliation}</span>
-                    </div>
-                  </div>
-
-                  {/* Abstract Excerpt */}
-                  <p className="text-xs sm:text-sm text-[#575551] font-editorial-body leading-relaxed line-clamp-3 pt-1">
-                    {article.abstract}
-                  </p>
-
-                  {/* Keywords */}
-                  <div className="pt-2 flex flex-wrap items-center gap-1.5 text-xs text-[#575551]">
-                    <span className="font-semibold text-slate-700">Keywords:</span>
-                    {article.keywords.map((kw, idx) => (
-                      <span key={kw}>
-                        {kw}{idx < article.keywords.length - 1 ? ',' : ''}
+                {/* Meta Strip: Category, Volume, Date, Status */}
+                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-[#575551]">
+                  <span className="text-[10px] font-bold text-[#7F3040] uppercase tracking-wider bg-[#7F3040]/5 px-2 py-0.5 rounded-2xs border border-[#7F3040]/15">
+                    {article.articleType}
+                  </span>
+                  <span aria-hidden="true" className="text-[#C6A15B]">•</span>
+                  <span className="font-medium text-stone-700">Vol. {article.volume}, Issue {article.issue}</span>
+                  <span aria-hidden="true" className="text-[#C6A15B]">•</span>
+                  <span>{article.month} {article.year}</span>
+                  {article.pages && (
+                    <>
+                      <span aria-hidden="true" className="text-[#C6A15B]">•</span>
+                      <span>pp. {article.pages}</span>
+                    </>
+                  )}
+                  {article.doi && (
+                    <>
+                      <span aria-hidden="true" className="text-[#C6A15B]">•</span>
+                      <span className="text-[10px] font-mono text-stone-400 truncate max-w-[140px] sm:max-w-none">
+                        doi:{article.doi}
                       </span>
-                    ))}
-                  </div>
-
+                    </>
+                  )}
                 </div>
 
-                {/* Right Action Rail (Read, PDF, Cite) */}
-                <div className="w-full md:w-44 shrink-0 flex flex-wrap sm:flex-nowrap md:flex-col items-center md:items-stretch gap-2 pt-3 md:pt-0 border-t md:border-t-0 md:border-l border-[#E8DED3] md:pl-5">
+                {/* Article Title */}
+                <h4 
+                  onClick={() => onSelectArticle(article.slug)}
+                  className="text-base sm:text-[17.5px] font-bold font-academic text-[#292929] group-hover:text-[#7F3040] transition-colors cursor-pointer leading-snug pt-0.5"
+                >
+                  {article.title}
+                </h4>
+
+                {/* Authors & Institutional Line */}
+                <div className="text-xs text-[#575551] flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                  <div className="flex items-center gap-1 font-medium text-stone-800">
+                    <User className="w-3 h-3 text-[#7F3040] shrink-0" />
+                    <span>{article.authors.map(a => a.name).join(', ')}</span>
+                  </div>
+                  {article.authors[0]?.affiliation && (
+                    <>
+                      <span className="text-stone-300">|</span>
+                      <span className="text-stone-500 italic font-serif text-[11.5px] truncate max-w-sm">
+                        {article.authors[0].affiliation}
+                      </span>
+                    </>
+                  )}
+                </div>
+
+                {/* Concise Abstract Excerpt */}
+                <p className="text-xs text-[#575551] font-editorial-body leading-relaxed line-clamp-2 pt-0.5">
+                  {article.abstract}
+                </p>
+
+              </div>
+
+              {/* Bottom Action Strip: Keywords on Left, Action Buttons on Right */}
+              <div className="pt-3 mt-3 border-t border-[#F2ECE1] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                
+                {/* Keywords Tags */}
+                <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-[#575551]">
+                  <span className="font-semibold text-stone-600 text-[10px] uppercase tracking-wider">Keywords:</span>
+                  {article.keywords.slice(0, 3).map((kw) => (
+                    <span 
+                      key={kw} 
+                      className="bg-[#F8F5EE] border border-[#E8DED3] px-1.5 py-0.5 rounded-2xs text-[10.5px] text-stone-600"
+                    >
+                      {kw}
+                    </span>
+                  ))}
+                  {article.keywords.length > 3 && (
+                    <span className="text-[10px] text-stone-400">+{article.keywords.length - 3}</span>
+                  )}
+                </div>
+
+                {/* Compact Action Buttons */}
+                <div className="flex items-center gap-1.5 shrink-0 self-end sm:self-auto">
                   <button
                     onClick={() => onSelectArticle(article.slug)}
-                    className="flex-1 sm:flex-initial md:w-full inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-[#7F3040] hover:bg-[#642331] text-white text-xs font-semibold uppercase tracking-wider rounded-xs transition-colors shrink-0"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#7F3040] hover:bg-[#642331] text-white text-xs font-semibold uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
                   >
-                    <FileText className="w-3.5 h-3.5" />
+                    <FileText className="w-3 h-3" />
                     <span>Read Article</span>
                   </button>
 
                   <button
                     onClick={(e) => handlePdfClick(e, article)}
-                    className="flex-1 sm:flex-initial md:w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-[#F8F5EE] hover:bg-[#E8DED3] text-[#292929] border border-[#E8DED3] text-xs font-medium rounded-xs transition-colors shrink-0"
-                    title="Download / View Scholarly Offprint PDF"
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#F8F5EE] hover:bg-[#E8DED3] text-[#292929] border border-[#E8DED3] text-xs font-medium rounded-xs transition-colors cursor-pointer"
+                    title="Print / View Offprint PDF"
                   >
-                    <Download className="w-3.5 h-3.5 text-[#7F3040]" />
+                    <Download className="w-3 h-3 text-[#7F3040]" />
                     <span>PDF</span>
                   </button>
 
                   <button
                     onClick={() => setSelectedForCitation(article)}
-                    className="w-full sm:w-auto md:w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-white hover:bg-[#F8F5EE] text-[#575551] hover:text-[#7F3040] border border-[#E8DED3] text-xs font-medium rounded-xs transition-colors shrink-0"
-                    title="Generate bibliographic citation"
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-white hover:bg-[#F8F5EE] text-[#575551] hover:text-[#7F3040] border border-[#E8DED3] text-xs font-medium rounded-xs transition-colors cursor-pointer"
+                    title="Generate Citation"
                   >
-                    <Quote className="w-3.5 h-3.5 text-[#C6A15B]" />
+                    <Quote className="w-3 h-3 text-[#C6A15B]" />
                     <span>Cite</span>
                   </button>
                 </div>
 
               </div>
+
             </article>
           ))}
         </div>

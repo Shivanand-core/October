@@ -177,7 +177,7 @@ export default function App() {
       </div>
 
       {/* Main Dynamic View Content */}
-      <main className="flex-1">
+      <main className="flex-1 pt-14 md:pt-0">
         {renderCurrentView()}
       </main>
 

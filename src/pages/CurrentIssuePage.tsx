@@ -3,6 +3,7 @@ import { Calendar, Layers, Download, Quote, FileText, ArrowRight, User, Building
 import { ALL_ISSUES, SAMPLE_ARTICLES } from '../data/articles';
 import { Article } from '../types/journal';
 import { CitationModal } from '../components/layout/CitationModal';
+import { getAssetPath } from '../utils/assets';
 
 interface Props {
   onNavigate: (path: string) => void;
@@ -37,69 +38,80 @@ export const CurrentIssuePage: React.FC<Props> = ({ onNavigate, onSelectArticle 
       </div>
 
       {/* Issue Overview Card */}
-      <div className="bg-white border border-[#E8DED3] rounded-xs p-4 sm:p-8 mb-8 sm:mb-10 shadow-xs">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      <div className="bg-white border border-[#E8DED3] rounded-xs p-4 sm:p-7 mb-8 sm:mb-10 shadow-xs">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center">
           
-          <div className="md:col-span-8 space-y-4">
-            <div className="flex flex-wrap items-center gap-3 text-xs text-[#575551]">
+          {/* Issue Cover Thumbnail */}
+          <div className="md:col-span-3 flex justify-center">
+            <div className="relative w-full max-w-[180px] sm:max-w-[210px] aspect-[3819/4963] rounded-xs shadow-md border border-[#E8DED3] overflow-hidden group bg-[#F8F5EE] select-none">
+              <img
+                src={getAssetPath('logos/cover-page.jpg')}
+                alt="Shivraj 350 - Volume 1, Issue 1 Official Cover Page"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+            </div>
+          </div>
+
+          <div className="md:col-span-5 space-y-3.5">
+            <div className="flex flex-wrap items-center gap-2.5 text-xs text-[#575551]">
               <span className="font-bold text-[#7F3040] uppercase tracking-wider">
                 INAUGURAL EDITION
               </span>
               <span aria-hidden="true">•</span>
-              <span>Published by Shivaji College</span>
+              <span>Shivaji College (DU)</span>
               <span aria-hidden="true">•</span>
-              <span>Open Access Repository</span>
+              <span className="text-emerald-800 font-medium">Open Access</span>
             </div>
 
-            <h2 className="text-2xl font-bold font-academic text-[#292929]">
+            <h2 className="text-xl sm:text-2xl font-bold font-academic text-[#292929]">
               Inaugurating Multidisciplinary Dialogues in Higher Education
             </h2>
 
-            <p className="text-sm text-[#575551] font-editorial-body leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#575551] font-editorial-body leading-relaxed">
               This inaugural volume marks the launch of a permanent platform for rigorous academic scholarship. 
               The collection brings together peer-reviewed contributions across environmental modeling, historical jurisprudence, 
               computational biochemical analysis, and interdisciplinary methodologies.
             </p>
 
-            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs">
+            <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
               <button
                 onClick={() => window.print()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#7F3040] text-white font-semibold uppercase tracking-wider rounded-xs hover:bg-[#642331] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#7F3040] text-white font-semibold uppercase tracking-wider rounded-xs hover:bg-[#642331] transition-colors"
               >
-                <Download className="w-4 h-4" />
-                <span>Download Issue Table of Contents</span>
+                <Download className="w-3.5 h-3.5" />
+                <span>Issue TOC</span>
               </button>
 
               <button
                 onClick={() => onNavigate('/publications/archives')}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#F8F5EE] border border-[#E8DED3] text-[#292929] font-medium uppercase tracking-wider rounded-xs hover:bg-[#E8DED3] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#F8F5EE] border border-[#E8DED3] text-[#292929] font-medium uppercase tracking-wider rounded-xs hover:bg-[#E8DED3] transition-colors"
               >
-                <BookOpen className="w-4 h-4 text-[#7F3040]" />
-                <span>View All Archives</span>
+                <BookOpen className="w-3.5 h-3.5 text-[#7F3040]" />
+                <span>All Archives</span>
               </button>
             </div>
           </div>
 
           {/* Quick Particulars Box */}
-          <div className="md:col-span-4 bg-[#F8F5EE] border border-[#E8DED3] p-5 rounded-xs space-y-2.5 text-xs">
+          <div className="md:col-span-4 bg-[#F8F5EE] border border-[#E8DED3] p-4 sm:p-5 rounded-xs space-y-2 text-xs">
             <h3 className="font-bold text-[#7F3040] uppercase tracking-wider text-[11px] border-b border-[#E8DED3] pb-1.5">
               Issue Particulars
             </h3>
-            <div className="flex justify-between py-1 border-b border-[#F8F5EE]">
+            <div className="flex justify-between py-1 border-b border-[#E8DED3]/60">
               <span className="text-slate-600">Volume / Issue:</span>
               <span className="font-semibold text-slate-900">Vol. 1, No. 1</span>
             </div>
-            <div className="flex justify-between py-1 border-b border-[#F8F5EE]">
+            <div className="flex justify-between py-1 border-b border-[#E8DED3]/60">
               <span className="text-slate-600">Period:</span>
               <span className="font-semibold text-slate-900">January–June 2026</span>
             </div>
-            <div className="flex justify-between py-1 border-b border-[#F8F5EE]">
+            <div className="flex justify-between py-1 border-b border-[#E8DED3]/60">
               <span className="text-slate-600">Publisher:</span>
               <span className="font-semibold text-slate-900">Shivaji College (DU)</span>
             </div>
             <div className="flex justify-between py-1">
               <span className="text-slate-600">Review Model:</span>
-              <span className="font-semibold text-slate-900">Double-Blind Peer Review</span>
+              <span className="font-semibold text-slate-900">Double-Blind Review</span>
             </div>
           </div>
 

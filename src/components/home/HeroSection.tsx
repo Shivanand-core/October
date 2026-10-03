@@ -42,12 +42,12 @@ export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
             A peer-reviewed academic platform published by Shivaji College, dedicated to publishing original empirical investigations, humanistic reflections, and socio-economic inquiry.
           </p>
 
-          {/* Campus Photo Visual (Compact, non-overflowing) */}
-          <div className="relative aspect-[16/9] rounded-xs overflow-hidden bg-white border border-[#E8DED3] shadow-xs">
+          {/* Campus Photo Visual (Compact, non-overflowing, fully visible 3:2 aspect) */}
+          <div className="relative aspect-[3/2] rounded-xs overflow-hidden bg-[#F4EFE6] border border-[#E8DED3] shadow-xs">
             <img
               src={campusPhotoSrc}
               alt="Shivaji College Campus, University of Delhi"
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-contain object-top"
               onError={() => setPhotoError(true)}
             />
             <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent py-2 px-3 text-white text-[11px]">
@@ -173,11 +173,11 @@ export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
                 
                 {/* Photo View if file exists, or Architectural Campus Vignette */}
                 {!photoError ? (
-                  <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-xs overflow-hidden bg-white border border-[#E8DED3] shadow-xs group">
+                  <div className="relative aspect-[3/2] rounded-xs overflow-hidden bg-[#F4EFE6] border border-[#E8DED3] shadow-xs group">
                     <img
                       src={campusPhotoSrc}
                       alt="Shivaji College Campus, University of Delhi"
-                      className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full h-full object-contain object-top transition-transform duration-300 group-hover:scale-[1.01]"
                       onError={() => setPhotoError(true)}
                     />
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pt-6 pb-2.5 px-3 text-white text-xs">

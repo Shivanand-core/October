@@ -45,7 +45,7 @@ export const MobileHeader: React.FC<Props> = ({ currentPath, onNavigate, onOpenS
   };
 
   return (
-    <header className="md:hidden sticky top-0 z-40 bg-[#7F3040] text-white shadow-md border-b border-[#642331]">
+    <header className="md:hidden fixed top-0 left-0 right-0 z-40 bg-[#7F3040]/95 backdrop-blur-md text-white shadow-md border-b border-[#642331]">
       {/* Compact Mobile Top Bar */}
       <div className="px-3 sm:px-4 h-14 flex items-center justify-between">
         

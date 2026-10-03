@@ -22,7 +22,7 @@ export const CallForPapersSection: React.FC<Props> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
             
             {/* Left 7 Columns: Announcement & Scope */}
-            <div className="lg:col-span-7 space-y-3 sm:space-y-4">
+            <div className="lg:col-span-7 space-y-3 sm:space-y-4 pt-3.5 sm:pt-0">
               <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#7F3040]">
                 <Bell className="w-4 h-4 text-[#C6A15B]" />
                 <span>Call for Manuscripts · {CALL_FOR_PAPERS_INFO.targetVolume}</span>

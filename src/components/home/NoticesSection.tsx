@@ -8,16 +8,16 @@ interface Props {
 
 export const NoticesSection: React.FC<Props> = ({ onNavigate }) => {
   return (
-    <section className="py-14 bg-[#F8F5EE] border-b border-[#E8DED3] px-4 sm:px-6 lg:px-8">
+    <section className="py-9 sm:py-14 bg-[#F8F5EE] border-b border-[#E8DED3] px-3.5 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#E8DED3] pb-3 mb-8 gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#E8DED3] pb-3 mb-6 sm:mb-8 gap-2">
           <div>
             <span className="text-[11px] font-bold tracking-widest uppercase text-[#7F3040]">
               EDITORIAL NOTIFICATIONS
             </span>
-            <h3 className="text-2xl sm:text-3xl font-bold font-academic text-[#292929] mt-0.5">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-academic text-[#292929] mt-0.5">
               Journal Notices & Announcements
             </h3>
           </div>
@@ -27,11 +27,11 @@ export const NoticesSection: React.FC<Props> = ({ onNavigate }) => {
         </div>
 
         {/* Notices Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {ANNOUNCEMENTS_DATA.map((item) => (
             <div
               key={item.id}
-              className="bg-white border border-[#E8DED3] hover:border-[#7F3040] p-6 rounded-xs flex flex-col justify-between group transition-all duration-200 hover:shadow-xs"
+              className="bg-white border border-[#E8DED3] hover:border-[#7F3040] p-4.5 sm:p-6 rounded-xs flex flex-col justify-between group transition-all duration-200 hover:shadow-xs"
             >
               <div>
                 {/* Notice Category & Date */}
