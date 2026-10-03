@@ -24,9 +24,35 @@ import { PoliciesPage } from './pages/PoliciesPage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
+// Helper to normalize path when hosted in a GitHub Pages subfolder (e.g. /October/ -> /)
+const getCleanRoute = (pathname: string): string => {
+  const knownRoutes = ['about', 'policies', 'publications', 'for-authors', 'editorial-board', 'contact', 'articles'];
+  const segments = pathname.split('/').filter(Boolean);
+  
+  if (segments.length === 0) return '/';
+  
+  // If first segment is NOT a known route, it's the GitHub repository name
+  if (!knownRoutes.includes(segments[0])) {
+    const remaining = segments.slice(1).join('/');
+    return remaining ? `/${remaining}` : '/';
+  }
+  
+  return `/${segments.join('/')}`;
+};
+
+// Helper to retain the repository prefix when navigating (e.g. /October)
+const getRepoBase = (): string => {
+  const knownRoutes = ['about', 'policies', 'publications', 'for-authors', 'editorial-board', 'contact', 'articles'];
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  if (segments.length > 0 && !knownRoutes.includes(segments[0])) {
+    return `/${segments[0]}`;
+  }
+  return '';
+};
+
 export default function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
-    return window.location.pathname || '/';
+    return getCleanRoute(window.location.pathname || '/');
   });
 
   const [searchModalOpen, setSearchModalOpen] = useState(false);
@@ -34,16 +60,18 @@ export default function App() {
   // Sync with browser back/forward buttons
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentPath(window.location.pathname || '/');
+      setCurrentPath(getCleanRoute(window.location.pathname || '/'));
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const navigateTo = (path: string) => {
-    if (path !== currentPath) {
-      window.history.pushState({}, '', path);
-      setCurrentPath(path);
+    const cleanTarget = path.startsWith('/') ? path : `/${path}`;
+    if (cleanTarget !== currentPath) {
+      const fullUrl = `${getRepoBase()}${cleanTarget === '/' ? '/' : cleanTarget}`;
+      window.history.pushState({}, '', fullUrl);
+      setCurrentPath(cleanTarget);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
