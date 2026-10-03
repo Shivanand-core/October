@@ -1,6 +1,14 @@
 import { JournalParticularItem } from '../types/journal';
 
-export const JOURNAL_PARTICULARS: JournalParticularItem[] = [
+export interface FullJournalParticular {
+  label: string;
+  value: string;
+  isConfirmed: boolean;
+  notes?: string;
+  linkHref?: string;
+}
+
+export const COMPLETE_JOURNAL_INFORMATION: FullJournalParticular[] = [
   {
     label: 'Journal Title',
     value: 'Shivraj 350: International Peer Reviewed Multidisciplinary Journal',
@@ -13,36 +21,20 @@ export const JOURNAL_PARTICULARS: JournalParticularItem[] = [
   },
   {
     label: 'Publishing Institution',
-    value: 'Shivaji College (Accredited by NAAC with Grade "A")',
+    value: 'Shivaji College, University of Delhi',
     isConfirmed: true
   },
   {
-    label: 'Academic Affiliation',
-    value: 'University of Delhi',
-    isConfirmed: true
-  },
-  {
-    label: 'ISSN (Online)',
+    label: 'ISSN',
     value: 'To be officially confirmed',
     isConfirmed: false,
-    notes: 'Application in process with National Science Library (NIScPR), India'
+    notes: 'Formal application in process with National Science Library (NIScPR), India'
   },
   {
-    label: 'ISSN (Print)',
+    label: 'Frequency',
     value: 'To be officially confirmed',
     isConfirmed: false,
-    notes: 'Pending official notification'
-  },
-  {
-    label: 'Publication Frequency',
-    value: 'To be officially confirmed',
-    isConfirmed: false,
-    notes: 'Biannual (Two issues per volume per academic year proposed)'
-  },
-  {
-    label: 'Starting Year',
-    value: '2026',
-    isConfirmed: true
+    notes: 'Biannual schedule (2 issues per volume per academic cycle proposed)'
   },
   {
     label: 'Place of Publication',
@@ -55,62 +47,75 @@ export const JOURNAL_PARTICULARS: JournalParticularItem[] = [
     isConfirmed: true
   },
   {
-    label: 'Broad Subject Category',
-    value: 'Multidisciplinary (Sciences, Humanities, Social Sciences, Commerce)',
+    label: 'Starting Year',
+    value: '2026',
     isConfirmed: true
   },
   {
-    label: 'Language of Publication',
-    value: 'English (Additional languages pending official confirmation)',
-    isConfirmed: false
+    label: 'Broad Subject Category',
+    value: 'Multidisciplinary',
+    isConfirmed: true,
+    notes: 'Sciences, Humanities, Social Sciences, Commerce & Applied Interdisciplinary Studies'
+  },
+  {
+    label: 'Language',
+    value: 'To be officially confirmed',
+    isConfirmed: false,
+    notes: 'English (Inaugural volumes); additional multilingual criteria subject to Editorial Board ratification'
   },
   {
     label: 'Publication Format',
-    value: 'Online (Digital Scholarly Repository)',
-    isConfirmed: true
+    value: 'Online',
+    isConfirmed: true,
+    notes: 'Digital Open Access Repository'
   },
   {
-    label: 'Article Processing Charges (APC) / Fee',
+    label: 'Publication Fee',
     value: 'To be officially confirmed',
     isConfirmed: false,
-    notes: 'Zero publication fee model subject to final institutional policy'
+    notes: 'Zero Article Processing Charges (APC) policy pending Governing Body ratification'
   },
   {
     label: 'Current Issue',
-    value: 'Inaugural Issue — Volume 1, Issue 1 — January–June 2026',
-    isConfirmed: true
+    value: 'Volume 1, Issue 1 (Inaugural Issue, 2026)',
+    isConfirmed: true,
+    notes: 'Scheduled for release following active peer review cycle'
   },
   {
     label: 'Editorial Office',
-    value: 'Shivaji College, University of Delhi, Ring Road, Raja Garden, New Delhi – 110027, India',
+    value: 'Shivaji College, University of Delhi',
     isConfirmed: true
   },
   {
-    label: 'Official Email',
+    label: 'Email',
     value: 'journal@shivaji.du.ac.in',
-    isConfirmed: true
+    isConfirmed: true,
+    linkHref: 'mailto:journal@shivaji.du.ac.in'
   },
   {
-    label: 'Institutional Portal',
+    label: 'Website',
     value: 'www.shivajicollege.ac.in',
+    isConfirmed: true,
+    linkHref: 'https://www.shivajicollege.ac.in'
+  },
+  {
+    label: 'Address',
+    value: 'Ring Road, Raja Garden, New Delhi – 110027, India',
     isConfirmed: true
   },
   {
     label: 'Access Model',
     value: 'Open Access Repository (Online)',
     isConfirmed: true,
-    notes: 'Free public access for academic readers and scholars'
+    notes: 'Universal barrier-free academic access for scholars, researchers, and students'
   },
   {
-    label: 'Copyright & Licensing Policy',
+    label: 'Copyright / Licensing',
     value: 'To be officially confirmed',
     isConfirmed: false,
-    notes: 'Specific copyright transfer and Open Access licensing will be ratified by the Governing Body'
-  },
-  {
-    label: 'Review System',
-    value: 'Double-Blind Peer Review',
-    isConfirmed: true,
-    notes: 'Independent double-blind evaluation by subject experts'
+    notes: 'Formal Creative Commons (CC BY / CC BY-NC) attribution framework under ratification'
   }
 ];
+
+// Backward compatibility alias
+export const JOURNAL_PARTICULARS = COMPLETE_JOURNAL_INFORMATION;

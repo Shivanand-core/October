@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { BookOpen, CheckCircle, Clock, ShieldAlert, Award, FileSpreadsheet, Building2, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { BookOpen, CheckCircle, Clock, ShieldAlert, Award, FileSpreadsheet, Building2, ExternalLink, Mail } from 'lucide-react';
 import { JOURNAL_DATA, SCOPE_CATEGORIES, CONTRIBUTION_TYPES } from '../data/journal';
-import { JOURNAL_PARTICULARS } from '../data/journalParticulars';
+import { COMPLETE_JOURNAL_INFORMATION, FullJournalParticular } from '../data/journalParticulars';
 import { InstitutionalLogo } from '../components/ui/InstitutionalLogo';
 
 interface Props {
@@ -9,7 +9,16 @@ interface Props {
 }
 
 export const AboutPage: React.FC<Props> = ({ onNavigate }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'particulars' | 'scope' | 'contributions'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'information' | 'scope' | 'contributions'>('overview');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.toLowerCase();
+      if (hash.includes('information') || hash.includes('particulars')) {
+        setActiveTab('information');
+      }
+    }
+  }, []);
 
   return (
     <div className="py-6 sm:py-10 md:py-16 px-3.5 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -45,14 +54,14 @@ export const AboutPage: React.FC<Props> = ({ onNavigate }) => {
           1. Overview
         </button>
         <button
-          onClick={() => setActiveTab('particulars')}
+          onClick={() => setActiveTab('information')}
           className={`px-3.5 sm:px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-xs transition-colors shrink-0 ${
-            activeTab === 'particulars'
+            activeTab === 'information'
               ? 'bg-[#7F3040] text-white'
               : 'bg-white text-[#292929] hover:bg-[#E8DED3] border border-[#E8DED3]'
           }`}
         >
-          2. Particulars Table
+          2. Journal Information
         </button>
         <button
           onClick={() => setActiveTab('scope')}
@@ -178,12 +187,12 @@ export const AboutPage: React.FC<Props> = ({ onNavigate }) => {
         </div>
       )}
 
-      {/* TAB 2: JOURNAL PARTICULARS TABLE (Section 22 Compliance) */}
-      {activeTab === 'particulars' && (
+      {/* TAB 2: JOURNAL INFORMATION & COMPLETE METADATA */}
+      {activeTab === 'information' && (
         <div className="space-y-6">
           <div className="bg-white border border-[#E8DED3] p-4 rounded-xs text-xs text-[#575551] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span>
-              Official Journal Particulars Table in accordance with scholarly publishing standards and ISSN guidelines.
+              Official Journal Information and metadata registry in accordance with scholarly publishing guidelines and ISSN standards.
             </span>
             <span className="text-[#7F3040] font-semibold">
               Updated: Academic Session 2026
@@ -208,7 +217,7 @@ export const AboutPage: React.FC<Props> = ({ onNavigate }) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#E8DED3]">
-                  {JOURNAL_PARTICULARS.map((item, index) => (
+                  {COMPLETE_JOURNAL_INFORMATION.map((item, index) => (
                     <tr 
                       key={item.label}
                       className={index % 2 === 0 ? 'bg-[#F8F5EE]/40 hover:bg-[#E8DED3]/40' : 'bg-white hover:bg-[#E8DED3]/40'}
@@ -217,7 +226,25 @@ export const AboutPage: React.FC<Props> = ({ onNavigate }) => {
                         {item.label}
                       </td>
                       <td className="py-3.5 px-4 sm:px-6 text-[#575551] leading-relaxed align-top">
-                        <span className="text-[#292929] font-medium">{item.value}</span>
+                        {item.linkHref ? (
+                          <a
+                            href={item.linkHref}
+                            target={item.linkHref.startsWith('http') ? '_blank' : undefined}
+                            rel={item.linkHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            className="text-[#7F3040] font-medium hover:underline inline-flex items-center gap-1.5"
+                          >
+                            <span>{item.value}</span>
+                            {item.linkHref.startsWith('http') ? (
+                              <ExternalLink className="w-3 h-3 text-[#C6A15B]" />
+                            ) : (
+                              <Mail className="w-3 h-3 text-[#C6A15B]" />
+                            )}
+                          </a>
+                        ) : (
+                          <span className={`font-medium ${item.isConfirmed ? 'text-[#292929]' : 'text-stone-600 italic font-serif'}`}>
+                            {item.value}
+                          </span>
+                        )}
                         {item.notes && (
                           <span className="block text-[11px] text-slate-500 italic mt-0.5">
                             Note: {item.notes}

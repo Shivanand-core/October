@@ -1,97 +1,190 @@
 import React from 'react';
-import { Compass, BookMarked, Scale, GraduationCap } from 'lucide-react';
-import { JOURNAL_DATA } from '../../data/journal';
+import { Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 
-export const JournalAtAGlanceSection: React.FC = () => {
-  const pillars = [
+interface Props {
+  onNavigate?: (path: string) => void;
+}
+
+interface GlanceItem {
+  id: string;
+  label: string;
+  value: string;
+  isConfirmed: boolean;
+  isEmail?: boolean;
+}
+
+export const JournalAtAGlanceSection: React.FC<Props> = ({ onNavigate }) => {
+  const glanceItems: GlanceItem[] = [
     {
-      title: 'Multidisciplinary Scope',
-      headline: 'Sciences, Humanities & Commerce',
-      description: 'Bridging empirical inquiry, quantitative sciences, social policies, and qualitative humanistic reflections within a cohesive scholarly repository.',
-      icon: Compass
+      id: 'title',
+      label: 'Journal Title',
+      value: 'Shivraj 350: International Peer Reviewed Multidisciplinary Journal',
+      isConfirmed: true
     },
     {
-      title: 'Double-Blind Review',
-      headline: 'Uncompromised Evaluation',
-      description: 'Systematic external peer evaluation concealing author and referee identities to ensure objective assessment and scholarly rigor.',
-      icon: Scale
+      id: 'publisher',
+      label: 'Publisher',
+      value: 'Shivaji College, University of Delhi',
+      isConfirmed: true
     },
     {
-      title: 'University Lineage',
-      headline: 'Shivaji College, University of Delhi',
-      description: 'Rooted in the academic heritage of one of India’s premier central universities, fostering independent research and knowledge stewardship.',
-      icon: GraduationCap
+      id: 'issn',
+      label: 'ISSN',
+      value: 'To be officially confirmed',
+      isConfirmed: false
     },
     {
-      title: 'Open Scholarship',
-      headline: 'Barrier-Free Dissemination',
-      description: 'Democratizing peer-reviewed findings for scholars, educators, policymakers, and civic researchers worldwide through an open-access online model.',
-      icon: BookMarked
+      id: 'format',
+      label: 'Publication Format',
+      value: 'Online',
+      isConfirmed: true
+    },
+    {
+      id: 'subject',
+      label: 'Subject',
+      value: 'Multidisciplinary',
+      isConfirmed: true
+    },
+    {
+      id: 'starting-year',
+      label: 'Starting Year',
+      value: '2026',
+      isConfirmed: true
+    },
+    {
+      id: 'email',
+      label: 'Journal Email',
+      value: 'journal@shivaji.du.ac.in',
+      isConfirmed: true,
+      isEmail: true
     }
   ];
 
   return (
-    <section className="py-14 bg-[#E8DED3]/30 border-b border-[#E8DED3] px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section 
+      aria-labelledby="glance-heading"
+      className="bg-[#F8F5EE] border-b border-[#E8DED3] py-7 sm:py-8 px-4 sm:px-6 lg:px-8"
+    >
+      <div className="max-w-4xl mx-auto">
         
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-[11px] font-bold tracking-widest uppercase text-[#7F3040] block mb-1">
-            PERMANENT EDITORIAL PRINCIPLES
-          </span>
-          <h3 className="text-2xl sm:text-3xl font-bold font-academic text-[#292929]">
-            Journal At a Glance
-          </h3>
-          <div className="w-16 h-0.5 bg-[#C6A15B] mx-auto mt-2.5 opacity-80" />
+        {/* Section Header: Compact & Academic */}
+        <div className="mb-4 sm:mb-5 text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-start gap-1.5 mb-1">
+            <span className="h-0.5 w-5 bg-[#C6A15B]" aria-hidden="true" />
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#7F3040]">
+              Institutional Specifications
+            </span>
+          </div>
+          <h2 
+            id="glance-heading"
+            style={{ fontFamily: "'Times New Roman', Times, serif" }}
+            className="text-xl sm:text-2xl font-bold text-[#7F3040] tracking-tight leading-tight"
+          >
+            JOURNAL AT A GLANCE
+          </h2>
+          <p className="text-xs sm:text-sm text-stone-600 font-serif italic mt-0.5">
+            Essential information about Shivraj 350
+          </p>
         </div>
 
-        {/* 4 Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.title}
-                className="bg-white border border-[#E8DED3] p-6 rounded-xs shadow-2xs hover:border-[#C6A15B] transition-colors"
-              >
-                <div className="w-10 h-10 rounded-xs bg-[#F8F5EE] border border-[#E8DED3] flex items-center justify-center mb-4 text-[#7F3040]">
-                  <Icon className="w-5 h-5" />
+        {/* Compact Scholarly Two-Column Table */}
+        <div className="bg-white border border-[#E8DED3] rounded-xs shadow-2xs overflow-hidden">
+          
+          {/* Restrained Burgundy Accent Rule */}
+          <div className="h-0.5 bg-[#7F3040]" />
+
+          {/* 7 Compact Rows */}
+          <div className="divide-y divide-[#EFE8DF]">
+            {glanceItems.map((item, index) => {
+              const isEven = index % 2 === 0;
+
+              return (
+                <div
+                  key={item.id}
+                  className={`px-3.5 sm:px-5 py-2.5 transition-colors ${
+                    isEven ? 'bg-white' : 'bg-[#FCFAF6]'
+                  } hover:bg-[#F9F5EE]`}
+                >
+                  {/* Desktop Two-Column Layout (~36% Label, ~64% Value) */}
+                  <div className="hidden sm:grid sm:grid-cols-12 items-baseline gap-3">
+                    <div className="sm:col-span-5 md:col-span-4 text-xs font-semibold uppercase tracking-wider text-[#554C42] font-academic">
+                      {item.label}
+                    </div>
+                    <div className="sm:col-span-7 md:col-span-8 text-xs sm:text-[13.5px] text-[#292929]">
+                      {item.isConfirmed ? (
+                        item.isEmail ? (
+                          <a
+                            href={`mailto:${item.value}`}
+                            className="text-[#7F3040] hover:text-[#5B1B29] font-medium hover:underline inline-flex items-center gap-1.5 transition-colors"
+                          >
+                            <Mail className="w-3.5 h-3.5 text-[#C6A15B] shrink-0" />
+                            <span>{item.value}</span>
+                          </a>
+                        ) : (
+                          <span className="font-normal font-sans text-[#292929]">
+                            {item.value}
+                          </span>
+                        )
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 text-stone-500 italic font-serif text-[13px]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15B]/70 shrink-0" />
+                          <span>{item.value}</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Mobile Stacked Layout (No Horizontal Scroll) */}
+                  <div className="sm:hidden flex flex-col space-y-0.5">
+                    <span className="text-[10px] font-bold text-[#7F3040] uppercase tracking-wider">
+                      {item.label}
+                    </span>
+                    <div className="text-xs text-[#292929] leading-snug">
+                      {item.isConfirmed ? (
+                        item.isEmail ? (
+                          <a
+                            href={`mailto:${item.value}`}
+                            className="text-[#7F3040] hover:text-[#5B1B29] font-medium hover:underline inline-flex items-center gap-1.5"
+                          >
+                            <Mail className="w-3 h-3 text-[#C6A15B] shrink-0" />
+                            <span>{item.value}</span>
+                          </a>
+                        ) : (
+                          <span className="font-normal font-sans text-[#292929]">
+                            {item.value}
+                          </span>
+                        )
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 text-stone-500 italic font-serif text-xs">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15B]/70 shrink-0" />
+                          <span>{item.value}</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <span className="text-[11px] font-bold tracking-wider uppercase text-[#7F3040] block">
-                  {item.title}
-                </span>
-                <h4 className="text-base font-bold font-academic text-[#292929] mt-1 mb-2">
-                  {item.headline}
-                </h4>
-                <p className="text-xs text-[#575551] font-editorial-body leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
 
-        {/* Institutional Fact Bar */}
-        <div className="mt-8 bg-white border border-[#E8DED3] p-4 rounded-xs flex flex-wrap items-center justify-around gap-4 text-xs text-[#575551] text-center">
-          <div>
-            <span className="font-bold text-[#7F3040] text-sm block">2026</span>
-            <span>Inception Year</span>
+          {/* Subtle Bottom Link to Full Journal Information */}
+          <div className="bg-[#FAF7F0] border-t border-[#E8DED3] px-3.5 sm:px-5 py-2 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+            <span className="text-stone-500 text-[11px] flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#7F3040] shrink-0" />
+              <span>Official Institutional Data · Shivaji College, University of Delhi</span>
+            </span>
+
+            {onNavigate && (
+              <button
+                onClick={() => onNavigate('/about')}
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#7F3040] hover:text-[#5B1B29] hover:underline transition-colors cursor-pointer"
+              >
+                <span>View Full Journal Information</span>
+                <ArrowRight className="w-3 h-3 text-[#C6A15B]" />
+              </button>
+            )}
           </div>
-          <div className="hidden sm:block w-px h-6 bg-[#E8DED3]" />
-          <div>
-            <span className="font-bold text-[#292929] text-sm block">Online</span>
-            <span>Digital Repository Format</span>
-          </div>
-          <div className="hidden sm:block w-px h-6 bg-[#E8DED3]" />
-          <div>
-            <span className="font-bold text-[#292929] text-sm block">Biannual</span>
-            <span>Publication Schedule (Proposed)</span>
-          </div>
-          <div className="hidden sm:block w-px h-6 bg-[#E8DED3]" />
-          <div>
-            <span className="font-bold text-[#7F3040] text-sm block">New Delhi</span>
-            <span>Place of Publication</span>
-          </div>
+
         </div>
 
       </div>
