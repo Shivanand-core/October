@@ -8,7 +8,7 @@ interface Props {
 
 export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
   const [photoError, setPhotoError] = useState(false);
-  const campusPhotoSrc = getAssetPath('logos/campus-photo.png');
+  const campusPhotoSrc = getAssetPath('logos/new shivaji college.png');
 
   return (
     <>
@@ -63,7 +63,7 @@ export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
             <img
               src={campusPhotoSrc}
               alt="Shivaji College Campus, University of Delhi"
-              className="w-full h-full object-contain object-top"
+              className="w-full h-full object-cover object-center"
               onError={() => setPhotoError(true)}
             />
             <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent py-2 px-3 text-white text-[11px]">
@@ -193,7 +193,7 @@ export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
                     <img
                       src={campusPhotoSrc}
                       alt="Shivaji College Campus, University of Delhi"
-                      className="w-full h-full object-contain object-top transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.01]"
                       onError={() => setPhotoError(true)}
                     />
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pt-6 pb-2.5 px-3 text-white text-xs">
