@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeroSection } from '../components/home/HeroSection';
+import { JournalParticularsSection } from '../components/home/JournalParticularsSection';
 import { QuickAccessSection } from '../components/home/QuickAccessSection';
 import { CurrentIssueSection } from '../components/home/CurrentIssueSection';
 import { LatestArticlesSection } from '../components/home/LatestArticlesSection';
@@ -17,6 +18,9 @@ export const HomePage: React.FC<Props> = ({ onNavigate, onSelectArticle }) => {
     <div>
       {/* 4. Hero Section */}
       <HeroSection onNavigate={onNavigate} />
+
+      {/* Journal Particulars Section */}
+      <JournalParticularsSection />
 
       {/* 5. Quick Access Section */}
       <QuickAccessSection onNavigate={onNavigate} />

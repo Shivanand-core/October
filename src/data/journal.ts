@@ -71,3 +71,133 @@ export const CONTRIBUTION_TYPES = [
     status: 'Pending official confirmation'
   }
 ];
+
+export interface JournalParticularItem {
+  id: string;
+  label: string;
+  value: string;
+  isConfirmed: boolean;
+  isLink?: boolean;
+  linkHref?: string;
+  category: 'identity' | 'specs' | 'contact';
+  isCompactGridItem?: boolean;
+}
+
+export const JOURNAL_PARTICULARS: JournalParticularItem[] = [
+  {
+    id: 'journal-title',
+    label: 'Journal Title',
+    value: 'Shivraj 350: International Peer Reviewed Multidisciplinary Journal',
+    isConfirmed: true,
+    category: 'identity'
+  },
+  {
+    id: 'publisher',
+    label: 'Publisher',
+    value: 'Shivaji College, University of Delhi',
+    isConfirmed: true,
+    category: 'identity'
+  },
+  {
+    id: 'publishing-institution',
+    label: 'Publishing Institution',
+    value: 'Shivaji College, University of Delhi',
+    isConfirmed: true,
+    category: 'identity'
+  },
+  {
+    id: 'issn',
+    label: 'ISSN',
+    value: 'To be officially confirmed',
+    isConfirmed: false,
+    category: 'specs',
+    isCompactGridItem: true
+  },
+  {
+    id: 'frequency',
+    label: 'Frequency',
+    value: 'To be officially confirmed',
+    isConfirmed: false,
+    category: 'specs',
+    isCompactGridItem: true
+  },
+  {
+    id: 'place-of-publication',
+    label: 'Place of Publication',
+    value: 'New Delhi',
+    isConfirmed: true,
+    category: 'specs',
+    isCompactGridItem: true
+  },
+  {
+    id: 'country-of-publication',
+    label: 'Country of Publication',
+    value: 'India',
+    isConfirmed: true,
+    category: 'specs',
+    isCompactGridItem: true
+  },
+  {
+    id: 'starting-year',
+    label: 'Starting Year',
+    value: '2026',
+    isConfirmed: true,
+    category: 'specs',
+    isCompactGridItem: true
+  },
+  {
+    id: 'broad-subject-category',
+    label: 'Broad Subject Category',
+    value: 'Multidisciplinary',
+    isConfirmed: true,
+    category: 'identity'
+  },
+  {
+    id: 'language',
+    label: 'Language',
+    value: 'To be officially confirmed',
+    isConfirmed: false,
+    category: 'specs',
+    isCompactGridItem: true
+  },
+  {
+    id: 'publication-format',
+    label: 'Publication Format',
+    value: 'Online',
+    isConfirmed: true,
+    category: 'specs',
+    isCompactGridItem: true
+  },
+  {
+    id: 'publication-fee',
+    label: 'Publication Fee',
+    value: 'To be officially confirmed',
+    isConfirmed: false,
+    category: 'specs',
+    isCompactGridItem: true
+  },
+  {
+    id: 'editorial-office',
+    label: 'Editorial Office',
+    value: 'Shivaji College, University of Delhi',
+    isConfirmed: true,
+    category: 'contact'
+  },
+  {
+    id: 'email',
+    label: 'Email',
+    value: 'journal@shivaji.du.ac.in',
+    isConfirmed: true,
+    isLink: true,
+    linkHref: 'mailto:journal@shivaji.du.ac.in',
+    category: 'contact'
+  },
+  {
+    id: 'address',
+    label: 'Address',
+    value: 'Ring Road, Raja Garden, New Delhi – 110027, India',
+    isConfirmed: true,
+    category: 'contact'
+  }
+];
+
