@@ -8,7 +8,7 @@ interface Props {
 
 export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
   const [photoError, setPhotoError] = useState(false);
-  const campusPhotoSrc = getAssetPath('logos/new shivaji college.png');
+  const campusPhotoSrc = getAssetPath('logos/Shivaji College Courtyard and Monument.png');
 
   return (
     <>
@@ -62,12 +62,12 @@ export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
           <div className="relative aspect-[3/2] rounded-xs overflow-hidden bg-[#F4EFE6] border border-[#E8DED3] shadow-xs">
             <img
               src={campusPhotoSrc}
-              alt="Shivaji College Campus, University of Delhi"
+              alt="Shivaji College Courtyard and Monument, University of Delhi"
               className="w-full h-full object-cover object-center"
               onError={() => setPhotoError(true)}
             />
             <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent py-2 px-3 text-white text-[11px]">
-              <span className="font-semibold block leading-tight">Shivaji College Campus</span>
+              <span className="font-semibold block leading-tight">Shivaji College Courtyard & Monument</span>
               <span className="text-[10px] text-stone-200">University of Delhi · Ring Road, Raja Garden</span>
             </div>
           </div>
@@ -192,12 +192,12 @@ export const HeroSection: React.FC<Props> = ({ onNavigate }) => {
                   <div className="relative aspect-[3/2] rounded-xs overflow-hidden bg-[#F4EFE6] border border-[#E8DED3] shadow-xs group">
                     <img
                       src={campusPhotoSrc}
-                      alt="Shivaji College Campus, University of Delhi"
+                      alt="Shivaji College Courtyard and Monument, University of Delhi"
                       className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.01]"
                       onError={() => setPhotoError(true)}
                     />
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pt-6 pb-2.5 px-3 text-white text-xs">
-                      <p className="font-semibold tracking-wide">Shivaji College Campus</p>
+                      <p className="font-semibold tracking-wide">Shivaji College Courtyard & Monument</p>
                       <p className="text-[11px] text-stone-200">University of Delhi · Ring Road, Raja Garden</p>
                     </div>
                   </div>
