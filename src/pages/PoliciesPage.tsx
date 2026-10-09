@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { ShieldCheck, CheckCircle2, Clock, ChevronRight, FileText, Scale, AlertTriangle, BookOpen } from 'lucide-react';
-import { POLICIES_DATA } from '../data/policies';
+import React, { useState, useEffect } from 'react';
+import { ShieldCheck, CheckCircle2, Clock, ChevronRight, FileText, Scale, AlertTriangle, BookOpen, AlertCircle } from 'lucide-react';
+import { POLICIES_DATA, resolvePolicySlug } from '../data/policies';
 
 interface Props {
   initialSlug?: string;
@@ -8,11 +8,23 @@ interface Props {
 }
 
 export const PoliciesPage: React.FC<Props> = ({ initialSlug, onNavigate }) => {
-  const [selectedSlug, setSelectedSlug] = useState<string>(
-    initialSlug || 'peer-review'
+  const [selectedSlug, setSelectedSlug] = useState<string>(() =>
+    resolvePolicySlug(initialSlug || 'peer-review')
   );
 
+  useEffect(() => {
+    if (initialSlug) {
+      setSelectedSlug(resolvePolicySlug(initialSlug));
+    }
+  }, [initialSlug]);
+
   const activePolicy = POLICIES_DATA.find(p => p.slug === selectedSlug) || POLICIES_DATA[0];
+
+  const handleSelectPolicy = (slug: string) => {
+    const canonical = resolvePolicySlug(slug);
+    setSelectedSlug(canonical);
+    onNavigate(`/policies/${canonical}`);
+  };
 
   return (
     <div className="py-10 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -42,8 +54,8 @@ export const PoliciesPage: React.FC<Props> = ({ initialSlug, onNavigate }) => {
         </label>
         <select
           id="mobile-policy-select"
-          value={selectedSlug}
-          onChange={(e) => setSelectedSlug(e.target.value)}
+          value={activePolicy.slug}
+          onChange={(e) => handleSelectPolicy(e.target.value)}
           className="w-full p-3 bg-[#F8F5EE] border border-[#E8DED3] text-xs font-semibold text-[#292929] rounded-xs outline-none focus:border-[#7F3040]"
         >
           {POLICIES_DATA.map((policy) => (
@@ -60,8 +72,8 @@ export const PoliciesPage: React.FC<Props> = ({ initialSlug, onNavigate }) => {
         {/* Left Column: Policy List Navigation (4 cols) - Desktop only */}
         <div className="hidden lg:block lg:col-span-4 bg-white border border-[#E8DED3] rounded-xs p-3 space-y-1 shadow-2xs">
           <div className="p-3 border-b border-[#E8DED3] mb-1">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#7F3040]">
-              POLICY REGISTER
+            <span className="text-[10px] font-bold tracking-widest uppercase text-[#7F3040]">
+              POLICY REGISTER ({POLICIES_DATA.length} DOCUMENTS)
             </span>
           </div>
 
@@ -70,8 +82,8 @@ export const PoliciesPage: React.FC<Props> = ({ initialSlug, onNavigate }) => {
             return (
               <button
                 key={policy.id}
-                onClick={() => setSelectedSlug(policy.slug)}
-                className={`w-full text-left p-3 rounded-xs text-xs font-semibold transition-all flex items-center justify-between group ${
+                onClick={() => handleSelectPolicy(policy.slug)}
+                className={`w-full text-left p-3 rounded-xs text-xs font-semibold transition-all flex items-center justify-between group cursor-pointer ${
                   isSelected
                     ? 'bg-[#7F3040] text-white shadow-2xs'
                     : 'text-[#292929] hover:bg-[#F8F5EE]'
@@ -92,7 +104,7 @@ export const PoliciesPage: React.FC<Props> = ({ initialSlug, onNavigate }) => {
           {/* Header of Active Policy */}
           <div className="border-b border-[#E8DED3] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#7F3040] block mb-1">
+              <span className="text-[10px] font-bold tracking-widest uppercase text-[#7F3040] block mb-1">
                 JOURNAL POLICY DOCUMENT
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold font-academic text-[#292929]">
@@ -101,59 +113,81 @@ export const PoliciesPage: React.FC<Props> = ({ initialSlug, onNavigate }) => {
             </div>
 
             <div>
-              {activePolicy.status === 'Confirmed' ? (
+              {activePolicy.isApproved ? (
                 <span className="inline-flex items-center gap-1 text-[11px] text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-xs border border-emerald-200 font-semibold">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                   Confirmed Policy
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 text-[11px] text-amber-900 bg-amber-50 px-2.5 py-1 rounded-xs border border-amber-200 font-medium">
+                <span className="inline-flex items-center gap-1.5 text-[11px] text-amber-900 bg-amber-50 px-2.5 py-1 rounded-xs border border-amber-200 font-semibold">
                   <Clock className="w-3.5 h-3.5 text-amber-700" />
-                  Pending Official Confirmation
+                  In Drafting Phase
                 </span>
               )}
             </div>
           </div>
 
-          {/* Policy Summary Callout */}
-          <div className="bg-[#F8F5EE] border-l-2 border-[#7F3040] p-4 text-xs sm:text-sm text-[#292929] font-editorial-body leading-relaxed italic">
-            &ldquo;{activePolicy.shortSummary}&rdquo;
-          </div>
+          {/* If Policy is Approved: Display official approved text */}
+          {activePolicy.isApproved ? (
+            <>
+              {/* Policy Summary Callout */}
+              <div className="bg-[#F8F5EE] border-l-2 border-[#7F3040] p-4 text-xs sm:text-sm text-[#292929] font-editorial-body leading-relaxed italic">
+                &ldquo;{activePolicy.shortSummary}&rdquo;
+              </div>
 
-          {/* Full Policy Content */}
-          <div className="space-y-4 text-sm text-[#292929] font-editorial-body leading-relaxed">
-            {activePolicy.content.map((paragraph, idx) => (
-              <p key={idx}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          {/* Standards & Invariants */}
-          {activePolicy.standards && activePolicy.standards.length > 0 && (
-            <div className="pt-6 border-t border-[#E8DED3] space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                Core Compliance Benchmarks:
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#575551]">
-                {activePolicy.standards.map((std) => (
-                  <div key={std} className="flex items-center gap-2 bg-[#F8F5EE] p-2.5 rounded-xs border border-[#E8DED3]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#7F3040] shrink-0" />
-                    <span className="font-medium text-slate-800">{std}</span>
-                  </div>
+              {/* Full Policy Content */}
+              <div className="space-y-4 text-sm text-[#292929] font-editorial-body leading-relaxed">
+                {activePolicy.content.map((paragraph, idx) => (
+                  <p key={idx}>
+                    {paragraph}
+                  </p>
                 ))}
+              </div>
+
+              {/* Standards & Invariants */}
+              {activePolicy.standards && activePolicy.standards.length > 0 && (
+                <div className="pt-6 border-t border-[#E8DED3] space-y-3">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                    Core Compliance Benchmarks:
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#575551]">
+                    {activePolicy.standards.map((std) => (
+                      <div key={std} className="flex items-center gap-2 bg-[#F8F5EE] p-2.5 rounded-xs border border-[#E8DED3]">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#7F3040] shrink-0" />
+                        <span className="font-medium text-slate-800">{std}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            /* If Policy is Under Development: Display exact required standard notice */
+            <div className="bg-[#F8F5EE] border border-[#E8DED3] p-8 sm:p-12 rounded-xs text-center space-y-4">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#7F3040]/10 text-[#7F3040] mb-1">
+                <Clock className="w-7 h-7" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold font-academic text-[#7F3040]">
+                Policy Under Development
+              </h3>
+              <p className="text-sm sm:text-base text-[#575551] font-editorial-body max-w-xl mx-auto leading-relaxed">
+                This policy is currently in the drafting phase. The approved policy document will be published here after completion and formal approval by the appropriate journal authorities.
+              </p>
+              <div className="pt-4 border-t border-[#E8DED3] max-w-md mx-auto text-xs text-[#575551] flex items-center justify-between">
+                <span>Shivraj 350 Editorial Board</span>
+                <span>Shivaji College · University of Delhi</span>
               </div>
             </div>
           )}
 
-          {/* Institutional Affirmation */}
-          <div className="pt-6 border-t border-[#E8DED3] text-xs text-[#575551] flex items-center justify-between">
-            <span>Administered by Editorial Board · Shivaji College</span>
+          {/* Institutional Affirmation Footer */}
+          <div className="pt-6 border-t border-[#E8DED3] text-xs text-[#575551] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <span>Administered by Editorial Secretariat · Shivaji College</span>
             <button
               onClick={() => onNavigate('/contact')}
-              className="text-[#7F3040] font-semibold hover:underline"
+              className="text-[#7F3040] font-semibold hover:underline text-left sm:text-right cursor-pointer"
             >
-              Inquire regarding policy interpretation →
+              Inquire regarding policy drafting & timelines →
             </button>
           </div>
 

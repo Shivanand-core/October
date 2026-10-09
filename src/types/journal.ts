@@ -100,7 +100,8 @@ export interface PolicyItem {
   shortSummary: string;
   content: string[];
   standards?: string[];
-  status: 'Confirmed' | 'Pending Official Confirmation';
+  status: 'Confirmed' | 'Pending Official Confirmation' | 'Under Development';
+  isApproved?: boolean;
 }
 
 export interface Announcement {

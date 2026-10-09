@@ -419,7 +419,7 @@ export const ScholarlyFooter: React.FC<Props> = ({ onNavigate }) => {
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('/policies/copyright')} className="hover:text-white hover:underline transition-colors text-left">
+                <button onClick={() => onNavigate('/policies/copyright-and-licensing')} className="hover:text-white hover:underline transition-colors text-left">
                   Copyright & Licensing
                 </button>
               </li>
@@ -429,7 +429,7 @@ export const ScholarlyFooter: React.FC<Props> = ({ onNavigate }) => {
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('/policies/archiving')} className="hover:text-white hover:underline transition-colors text-left">
+                <button onClick={() => onNavigate('/policies/archiving-policy')} className="hover:text-white hover:underline transition-colors text-left">
                   Archiving Policy
                 </button>
               </li>

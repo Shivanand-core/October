@@ -53,12 +53,12 @@ export const PrimaryNavigation: React.FC<Props> = ({ currentPath, onNavigate, on
         { label: 'Peer Review Policy', path: '/policies/peer-review' },
         { label: 'Publication Ethics', path: '/policies/publication-ethics' },
         { label: 'Plagiarism Policy', path: '/policies/plagiarism' },
-        { label: 'Copyright & Licensing', path: '/policies/copyright' },
+        { label: 'Copyright & Licensing', path: '/policies/copyright-and-licensing' },
         { label: 'Open Access Policy', path: '/policies/open-access' },
-        { label: 'Archiving Policy', path: '/policies/archiving' },
-        { label: 'Corrections & Retractions', path: '/policies/corrections' },
-        { label: 'AI Use Policy', path: '/policies/ai-use' },
-        { label: 'Complaints & Appeals', path: '/policies/complaints' }
+        { label: 'Archiving Policy', path: '/policies/archiving-policy' },
+        { label: 'Corrections & Retractions', path: '/policies/corrections-and-retractions' },
+        { label: 'AI Use Policy', path: '/policies/ai-use-policy' },
+        { label: 'Complaints & Appeals', path: '/policies/complaints-and-appeals' }
       ]
     },
     { label: 'CONTACT', path: '/contact' }

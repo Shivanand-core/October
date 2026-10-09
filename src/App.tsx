@@ -11,6 +11,8 @@ import { MobileHeader } from './components/layout/MobileHeader';
 import { ScholarlyFooter } from './components/layout/ScholarlyFooter';
 import { SearchModal } from './components/layout/SearchModal';
 
+import { resolvePolicySlug } from './data/policies';
+
 // Pages
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -90,8 +92,9 @@ export default function App() {
 
     // Policies routes: /policies or /policies/:slug
     if (currentPath.startsWith('/policies')) {
-      const policySlug = currentPath.replace('/policies/', '').replace('/policies', '');
-      return <PoliciesPage initialSlug={policySlug || 'peer-review'} onNavigate={navigateTo} />;
+      const rawPolicySlug = currentPath.replace('/policies/', '').replace('/policies', '');
+      const policySlug = resolvePolicySlug(rawPolicySlug);
+      return <PoliciesPage initialSlug={policySlug} onNavigate={navigateTo} />;
     }
 
     // For Authors routes

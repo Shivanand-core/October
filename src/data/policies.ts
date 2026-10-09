@@ -1,5 +1,52 @@
 import { PolicyItem } from '../types/journal';
 
+/**
+ * Centralized policy slug mapping and alias resolver.
+ * Ensures consistent canonical URL handling across all dropdowns, footers, and direct links.
+ */
+export const POLICY_ALIAS_MAP: Record<string, string> = {
+  // Aliases for copyright and licensing
+  'copyright': 'copyright-and-licensing',
+  'licensing': 'copyright-and-licensing',
+  'copyright-and-licensing': 'copyright-and-licensing',
+
+  // Aliases for archiving policy
+  'archiving': 'archiving-policy',
+  'digital-preservation': 'archiving-policy',
+  'archiving-policy': 'archiving-policy',
+
+  // Aliases for corrections and retractions
+  'corrections': 'corrections-and-retractions',
+  'retractions': 'corrections-and-retractions',
+  'corrections-and-retractions': 'corrections-and-retractions',
+
+  // Aliases for AI use policy
+  'ai': 'ai-use-policy',
+  'ai-use': 'ai-use-policy',
+  'ai-use-policy': 'ai-use-policy',
+
+  // Aliases for complaints and appeals
+  'complaints': 'complaints-and-appeals',
+  'appeals': 'complaints-and-appeals',
+  'complaints-and-appeals': 'complaints-and-appeals',
+
+  // Canonical base policies
+  'peer-review': 'peer-review',
+  'publication-ethics': 'publication-ethics',
+  'plagiarism': 'plagiarism',
+  'open-access': 'open-access',
+};
+
+/**
+ * Normalizes any route fragment or alias to the verified canonical policy slug.
+ */
+export function resolvePolicySlug(rawSlug: string): string {
+  if (!rawSlug) return 'peer-review';
+  const clean = rawSlug.trim().toLowerCase().replace(/^\/?policies\/?/, '').replace(/^\//, '');
+  if (!clean) return 'peer-review';
+  return POLICY_ALIAS_MAP[clean] || clean;
+}
+
 export const POLICIES_DATA: PolicyItem[] = [
   {
     id: 'peer-review',
@@ -19,7 +66,8 @@ export const POLICIES_DATA: PolicyItem[] = [
       'Confidentiality of Unpublished Findings',
       'Objective Editorial Conflict-of-Interest Disclosures'
     ],
-    status: 'Confirmed'
+    status: 'Under Development',
+    isApproved: false
   },
   {
     id: 'publication-ethics',
@@ -38,7 +86,8 @@ export const POLICIES_DATA: PolicyItem[] = [
       'Integrity in Authorship & Acknowledgements',
       'Protection of Human & Animal Subject Protocols'
     ],
-    status: 'Confirmed'
+    status: 'Under Development',
+    isApproved: false
   },
   {
     id: 'plagiarism',
@@ -56,7 +105,8 @@ export const POLICIES_DATA: PolicyItem[] = [
       'Stringent Adherence to UGC Plagiarism Guidelines',
       'Immediate Editorial Disqualification for Ethical Infractions'
     ],
-    status: 'Confirmed'
+    status: 'Under Development',
+    isApproved: false
   },
   {
     id: 'copyright-and-licensing',
@@ -74,7 +124,8 @@ export const POLICIES_DATA: PolicyItem[] = [
       'Non-Exclusive Publication Stewardship',
       'Formal Licensing Terms Pending Official Confirmation'
     ],
-    status: 'Pending Official Confirmation'
+    status: 'Under Development',
+    isApproved: false
   },
   {
     id: 'open-access',
@@ -91,7 +142,8 @@ export const POLICIES_DATA: PolicyItem[] = [
       'Immediate Online Repository Availability',
       'No Reader Subscription Fees'
     ],
-    status: 'Confirmed'
+    status: 'Under Development',
+    isApproved: false
   },
   {
     id: 'archiving-policy',
@@ -108,7 +160,8 @@ export const POLICIES_DATA: PolicyItem[] = [
       'Permanent URL & Identifier Preservation',
       'Author Self-Archiving Permitted'
     ],
-    status: 'Confirmed'
+    status: 'Under Development',
+    isApproved: false
   },
   {
     id: 'corrections-and-retractions',
@@ -125,7 +178,8 @@ export const POLICIES_DATA: PolicyItem[] = [
       'Transparent Retraction Procedures',
       'Permanent Archival Annotation'
     ],
-    status: 'Confirmed'
+    status: 'Under Development',
+    isApproved: false
   },
   {
     id: 'ai-use-policy',
@@ -142,7 +196,8 @@ export const POLICIES_DATA: PolicyItem[] = [
       'Mandatory Transparency & Disclosure Statements',
       'Strict Prohibition of AI in Peer Review Deliberations'
     ],
-    status: 'Confirmed'
+    status: 'Under Development',
+    isApproved: false
   },
   {
     id: 'complaints-and-appeals',
@@ -159,6 +214,7 @@ export const POLICIES_DATA: PolicyItem[] = [
       'Independent Senior Faculty Arbitration',
       'Written Procedural Documentation'
     ],
-    status: 'Confirmed'
+    status: 'Under Development',
+    isApproved: false
   }
 ];
